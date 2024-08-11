@@ -1,0 +1,554 @@
+/* CRÉATION DE LA BASE DE DONNÉES */
+DROP DATABASE blogmania;
+
+CREATE DATABASE blogmania;
+
+USE blogmania;
+
+CREATE TABLE Utilisateur(
+   Id_Utilisateur INT AUTO_INCREMENT,
+   nom VARCHAR(128) ,
+   prenom VARCHAR(128) ,
+   pseudo VARCHAR(128) ,
+   email VARCHAR(256) ,
+   ddn DATE,
+   password VARCHAR(256) ,
+   image VARCHAR(256) ,
+   role VARCHAR(64) ,
+   is_valid BOOLEAN,
+   PRIMARY KEY(Id_Utilisateur)
+);
+
+CREATE TABLE Categorie(
+   Id_Categorie INT AUTO_INCREMENT,
+   nom VARCHAR(256) ,
+   PRIMARY KEY(Id_Categorie)
+);
+
+CREATE TABLE Blog(
+   Id_Blog INT AUTO_INCREMENT,
+   titre VARCHAR(256) ,
+   image VARCHAR(256) ,
+   contenu TEXT,
+   date_ajout DATETIME,
+   is_valid BOOLEAN,
+   Id_Utilisateur INT,
+   Id_Categorie INT,
+   PRIMARY KEY(Id_Blog),
+   FOREIGN KEY(Id_Utilisateur) REFERENCES Utilisateur(Id_Utilisateur),
+   FOREIGN KEY(Id_Categorie) REFERENCES Categorie(Id_Categorie)
+);
+
+CREATE TABLE Commentaire(
+   Id_Commentaire INT AUTO_INCREMENT,
+   contenu TEXT,
+   titre VARCHAR(128) ,
+   date_publication DATETIME,
+   is_valid BOOLEAN,
+   Id_Blog INT,
+   Id_Utilisateur INT,
+   PRIMARY KEY(Id_Commentaire),
+   FOREIGN KEY(Id_Blog) REFERENCES Blog(Id_Blog),
+   FOREIGN KEY(Id_Utilisateur) REFERENCES Utilisateur(Id_Utilisateur)
+);
+
+CREATE TABLE likes(
+   Id_likes INT AUTO_INCREMENT,
+   Id_Utilisateur INT,
+   Id_Blog INT,
+   PRIMARY KEY(Id_likes),
+   FOREIGN KEY(Id_Utilisateur) REFERENCES Utilisateur(Id_Utilisateur),
+   FOREIGN KEY(Id_Blog) REFERENCES Blog(Id_Blog)
+);
+
+/* INSERTION DONNÉES UTILISATEURS */
+INSERT INTO Utilisateur (nom, prenom, email, ddn, pseudo, password, image, role)
+VALUES
+("Litzy","Grimes","Gabe_Price@gmail.com","2020-01-01","Dr. Bradley Buckridge","Cheese","https://loremflickr.com/640/480", "ROLE_USER"),
+("Tevin","Hegmann","Shayna53@hotmail.com","2020-01-01","Rosemary Ernser","Southeast","https://loremflickr.com/640/480", "ROLE_USER"),
+("Keara","Jacobs","German_Turner23@gmail.com","2020-01-01","Wendy Parker","Account","https://loremflickr.com/640/480", "ROLE_USER"),
+("Loren","Lind","Mellie48@yahoo.com","2020-01-01","Deanna O'Connell","Kentucky","https://loremflickr.com/640/480", "ROLE_USER"),
+("Garett","Yundt","Dandre.Prohaska@yahoo.com","2020-01-01","Leonard Osinski","becquerel","https://loremflickr.com/640/480", "ROLE_USER"),
+("Jacklyn","Gibson","Khalil19@yahoo.com","2020-01-01","Carla Ernser","Hatchback","https://loremflickr.com/640/480", "ROLE_USER"),
+("Antonette","Hyatt","Ernie.Dickinson@gmail.com","2020-01-01","Guillermo Hills","grey","https://loremflickr.com/640/480", "ROLE_USER"),
+("Enrico","Lueilwitz","Mabelle.Kohler8@hotmail.com","2020-01-01","Marie Schamberger","International","https://loremflickr.com/640/480", "ROLE_USER"),
+("Gunner","Labadie","Natalie_Renner@hotmail.com","2020-01-01","Mrs. Lena Fay","Wooden","https://loremflickr.com/640/480", "ROLE_USER"),
+("Jackeline","Heidenreich","Waino_Kunze46@yahoo.com","2020-01-01","Stanley Cassin","infomediaries","https://loremflickr.com/640/480", "ROLE_USER"),
+("Ethelyn","Rippin","Golda.Towne@yahoo.com","2020-01-01","Miss Jackie Little","North","https://loremflickr.com/640/480", "ROLE_USER"),
+("Skye","Carroll","Wilburn.Kuvalis@gmail.com","2020-01-01","Joe Torp","Maryland","https://loremflickr.com/640/480", "ROLE_USER"),
+("Kris","Ward","Jessy.OKon@gmail.com","2020-01-01","Meredith Hermiston","Folk","https://loremflickr.com/640/480", "ROLE_USER"),
+("Kariane","Kunde","Donald_Hyatt@yahoo.com","2020-01-01","Marco Lemke","array","https://loremflickr.com/640/480", "ROLE_USER"),
+("Aurore","Considine","Sofia.Stehr@gmail.com","2020-01-01","Angelina Davis","Non","https://loremflickr.com/640/480", "ROLE_USER");
+
+/* INSERTION DONNÉES CATEGORIES */
+INSERT INTO Categorie (nom)
+VALUES
+('Cinéma & Culture'),
+('Musique'),
+('Cuisine'),
+('Déco'),
+('Beauté & santé'),
+('Mode'),
+('Jeux & Jeux vidéo'),
+('High-tech et sciences'),
+('Sport');
+
+/* INSERTION DONNÉES BLOGS */
+INSERT INTO Blog (titre, contenu, date_ajout, image, Id_categorie, Id_utilisateur)
+VALUES
+("unde aperiam suscipit",
+"Vitae architecto eligendi nam cumque. Modi nobis aperiam odio voluptates neque rem. Dignissimos iste dolores alias temporibus.
+Natus in voluptatem. Ex qui qui architecto veritatis molestiae nostrum accusamus. Reiciendis accusantium eum voluptas doloribus unde hic quae doloremque tempora. Ab exercitationem velit.
+Fugit aliquid consequatur perspiciatis aspernatur expedita dolore placeat optio commodi. Quasi dolor necessitatibus. Odit illum soluta magni. Dolor repellat enim. Hic pariatur ratione.",
+"2020-01-01T09:09:00.000",
+"https://loremflickr.com/640/480",
+1,
+1),
+
+("iure libero nisi",
+"Adipisci quisquam officiis voluptate sit quae quidem provident adipisci. Magni exercitationem ratione a sint cupiditate minus alias expedita aperiam. Eaque aliquam ullam rerum doloribus magni fugiat perferendis alias quas. Error occaecati enim omnis.
+Voluptatum inventore earum libero optio commodi ullam error nesciunt. Alias dolor soluta esse molestiae molestias tempore quidem adipisci. Sunt beatae natus corrupti veritatis.
+Voluptatem explicabo consequuntur ad illo minus quasi iusto corrupti perspiciatis. Dolorem sed explicabo odit quis ea vitae consequatur veritatis quibusdam. Eligendi reiciendis veniam voluptate explicabo sit.",
+"2020-01-01T09:10:00.000",
+"https://loremflickr.com/640/480",
+2,
+2),
+
+("distinctio rem non",
+"Adipisci nam hic aliquid voluptatem deleniti quisquam ea mollitia. Doloribus minima delectus autem. Molestiae veritatis quis dolor beatae vel placeat. Veritatis amet nostrum eius porro vitae culpa. Molestias consectetur consequuntur voluptatum maxime quidem quibusdam. Incidunt reiciendis voluptatum impedit distinctio sed laborum.
+Dicta ducimus vel laboriosam fuga consequatur dolorum ea maxime. Quia dolores blanditiis quam officiis accusantium. Quo doloribus a assumenda dolores libero nihil perspiciatis repudiandae. Quis ex cumque quia expedita. Impedit vero cum fugit nostrum. Autem porro quisquam repudiandae quisquam.
+Modi ipsa perspiciatis animi. Pariatur perspiciatis quia officia excepturi sunt tenetur quasi totam sapiente. Molestiae exercitationem numquam facere labore ab facere facilis illo. Quam consequatur animi. Non quisquam reiciendis sapiente. Quo saepe corporis blanditiis est rem commodi dignissimos.",
+"2020-01-01T09:11:00.000",
+"https://loremflickr.com/640/480",
+2,
+3),
+
+("sint accusantium aliquid",
+"Culpa tempora quia. Reiciendis corporis eius placeat quam laborum temporibus cum excepturi. Sed dolorem quisquam corporis. At nulla cum consequuntur suscipit.
+Dolorum ipsam architecto earum. Nostrum cum in placeat amet illo natus assumenda. Laboriosam ratione deserunt saepe.
+Necessitatibus maxime cupiditate debitis quis animi sapiente. Laboriosam repellat tenetur laboriosam id commodi facilis eligendi neque laboriosam. Delectus inventore nemo facere iusto magnam corrupti officia commodi ab.",
+"2020-01-01T09:12:00.000",
+"https://loremflickr.com/640/480",
+3,
+4),
+
+("facilis voluptatum veritatis",
+"Nesciunt magni quia vel harum dolores consectetur odio laudantium. Nulla molestiae amet culpa. Unde distinctio quod perferendis alias ad quo. Quas officiis accusamus beatae non atque ipsum. Fugit nemo dolorum quas distinctio aliquid necessitatibus.
+Et quam pariatur vero illum tempora. Ex voluptatum in maiores commodi quam in architecto cupiditate vitae. Dignissimos laudantium excepturi occaecati officia dolore laudantium commodi dignissimos culpa. Quas magni atque dolorum sequi iste qui ex porro.
+Rerum cumque sequi. Facere hic facilis quas quis ipsam. Ratione deserunt ipsam repellat. Cumque at quasi quidem ipsa. Hic omnis labore. Eum non alias assumenda quas.",
+"2020-01-01T09:13:00.000",
+"https://loremflickr.com/640/480",
+4,
+5),
+
+("pariatur ratione ducimus",
+"Blanditiis eius quod. Labore nihil cum illum omnis eius. Architecto quas accusantium autem modi ipsam voluptate ratione.
+Magnam unde incidunt ipsam voluptatum laboriosam distinctio repellat dicta. Praesentium quisquam quo odit. Maiores nesciunt repellendus asperiores ipsum repellendus fuga hic quisquam nulla. Quibusdam aut soluta dolorem neque odit modi commodi iure exercitationem. Quam impedit dolor repudiandae officia consequatur adipisci minima ad quae.
+Modi nam nesciunt. Expedita delectus culpa. Tempore culpa sit qui vitae consequuntur possimus. Quasi consectetur voluptatem reprehenderit nam ducimus aut eius. Odio quasi vel at eligendi illo nobis odio odit. In omnis voluptatum enim quasi.",
+"2020-01-01T09:14:00.000",
+"https://loremflickr.com/640/480",
+5,
+6),
+
+("magnam unde mollitia",
+"Voluptatum dolorum incidunt sunt itaque praesentium corrupti quo accusamus inventore. Dicta libero fuga ipsa molestias molestiae eligendi nemo maiores. Facilis unde tempore officiis. Natus repellat quod error adipisci est cum reiciendis voluptates. Modi veritatis distinctio mollitia quibusdam sint cupiditate incidunt. Veritatis nostrum facere consequatur illum porro.
+Perferendis asperiores sint odit recusandae laboriosam excepturi velit expedita labore. Et cum earum reiciendis commodi sequi optio. Accusamus ipsam minima dolore minima necessitatibus pariatur. Quas sit nostrum atque molestiae illo optio illo sequi.
+Asperiores quaerat dicta minima id amet suscipit voluptates. Voluptatem libero nostrum laudantium iste alias voluptatibus dolore. Doloribus tenetur veniam impedit. Unde voluptatibus tempore facilis nostrum quae. Nulla ullam iusto molestias.",
+"2020-01-01T09:15:00.000",
+"https://loremflickr.com/640/480",
+6,
+7),
+
+("magni distinctio nisi",
+"Autem dolorum qui numquam esse accusantium ullam. Totam adipisci assumenda quaerat asperiores aperiam sunt dolor assumenda. Animi quos vero perferendis corporis laborum quam aut architecto.
+Officia omnis numquam cupiditate. Neque ipsum vitae. Natus eius porro possimus perspiciatis aliquam quo est voluptates iusto.
+Id laboriosam cupiditate itaque eligendi aut. Corporis accusamus ratione atque quod occaecati aperiam eius fugit. Exercitationem modi cumque deleniti tempore aliquam eaque.",
+"2020-01-01T09:16:00.000",
+"https://loremflickr.com/640/480",
+7,
+8),
+
+("veritatis eveniet impedit",
+"Nisi sit magnam unde. Aspernatur repellat ad expedita dignissimos. Asperiores accusamus atque natus distinctio ipsa iste dolorum veniam. A esse eum unde vel possimus. Natus eveniet fugiat maiores provident veritatis. Sunt nihil ab in harum.
+Beatae et ullam at aperiam voluptatibus eaque esse veritatis nemo. Nam delectus natus enim. Culpa iusto sequi incidunt similique iusto veritatis inventore earum debitis. Amet tempora aut doloremque optio quo error.
+Blanditiis autem at illum. Veniam magni explicabo ad libero velit unde in sapiente hic. Aspernatur nulla aut dicta culpa eius hic voluptates.",
+"2020-01-01T09:17:00.000",
+"https://loremflickr.com/640/480",
+8,
+9),
+
+("asperiores nemo quisquam",
+"Ea voluptatem iure reiciendis suscipit error eum et et corrupti. Molestias saepe molestias. Iste eaque a facilis rem eum est nam alias. Fuga illo a eaque autem voluptates quae eveniet voluptas. Quaerat eius ipsam illo ducimus.
+Ab dolorem possimus et officia. Officia temporibus suscipit fugit inventore quasi perspiciatis sapiente possimus. Enim molestiae quod laudantium suscipit in nihil soluta atque. Doloribus error cupiditate animi. Hic delectus numquam. Sit odio optio dolorum ut maiores.
+Nostrum dignissimos qui debitis odio ut est necessitatibus numquam dolorem. Ullam possimus qui. Possimus perferendis animi quos ipsum atque vel iusto libero fugiat.",
+"2020-01-01T09:18:00.000",
+"https://loremflickr.com/640/480",
+1,
+10),
+
+("dicta totam nam",
+"Aperiam laudantium voluptatem blanditiis quisquam iure animi. Soluta doloribus quis. Doloribus quos ut molestias sed.
+Consequatur autem perspiciatis odit fuga. Nobis assumenda cumque laudantium cumque eveniet cumque. Voluptas commodi quisquam aliquam sunt nam mollitia quae inventore.
+Soluta sapiente facere. Occaecati sunt eum consequuntur beatae eligendi porro. Quos reprehenderit ducimus nemo consequuntur officia tenetur minus amet. Placeat blanditiis nostrum dolor dignissimos.",
+"2020-01-01T09:19:00.000",
+"https://loremflickr.com/640/480",
+9,
+11),
+
+("enim eligendi quasi",
+"Ratione at error nihil minus ipsa. Quod cupiditate aliquid aspernatur sed sapiente. Unde aliquid iusto necessitatibus explicabo in.
+Natus rem nostrum ratione autem numquam. Officiis sed magnam deleniti atque. Distinctio accusamus minus quo repellendus in repudiandae nobis.
+Voluptas eveniet quo veritatis inventore recusandae pariatur temporibus molestias. Cupiditate provident iure minus sequi maxime. Hic laboriosam quaerat sunt. Excepturi autem error enim assumenda iusto maxime harum similique.",
+"2020-01-01T09:20:00.000",
+"https://loremflickr.com/640/480",
+1,
+12),
+
+("dolorum ut reiciendis",
+"Quam eligendi dolores. Neque dolorem aut. Tempora error a sint dolor. Consequatur nostrum laboriosam accusamus neque officia natus sed.
+Vero tempora nesciunt. Velit unde quas praesentium iure excepturi cupiditate provident unde quas. Porro in exercitationem ab dignissimos occaecati cum sapiente. Quaerat explicabo esse a odit.
+Ratione quas dignissimos aperiam illo deserunt sed. Iure voluptas quisquam molestias quam. Fuga itaque sunt placeat ullam quasi vel ad sequi fugiat. Sed voluptatem fugit.",
+"2020-01-01T09:21:00.000",
+"https://loremflickr.com/640/480",
+2,
+13),
+
+("incidunt impedit qui",
+"Ab quibusdam dolorem laboriosam libero. Quibusdam quaerat rerum similique animi. Accusantium assumenda doloribus voluptate animi totam explicabo. Nemo quasi quidem quo.
+Veniam soluta atque deleniti facilis perferendis culpa expedita. Dolorum officia tempora id architecto harum ipsam blanditiis officia nostrum. Unde laudantium eius molestiae. Ex iure aut laudantium.
+Esse accusantium nesciunt commodi. Laboriosam ad animi aliquam nesciunt nostrum ipsa officiis. Dicta est porro repellendus ipsam debitis voluptate amet architecto facere. Distinctio ipsa ipsum laborum deserunt. Eius sequi impedit sunt doloribus officia ut distinctio deleniti doloremque. Veritatis ad fugit.",
+"2020-01-01T09:22:00.000",
+"https://loremflickr.com/640/480",
+3,
+14),
+
+("veritatis voluptatibus ratione",
+"Iusto quas sequi fugiat id ea fuga voluptas iusto voluptates. Laboriosam aut nobis maxime nihil ut laborum ipsam. Dolor veritatis aspernatur vel quibusdam doloremque unde officia. Delectus et error distinctio laboriosam nam. Suscipit voluptatem veniam autem atque suscipit magnam culpa. Enim enim dolor tenetur veritatis pariatur temporibus maiores deserunt excepturi.
+Omnis delectus vel assumenda aspernatur odio nemo magnam perspiciatis labore. Veniam temporibus porro distinctio occaecati a ex qui quo. Earum repellat voluptatum doloremque. Repellendus nisi earum dolor provident commodi soluta. Eveniet odio aspernatur explicabo. Laudantium nesciunt temporibus a consequatur inventore deserunt odio.
+Reprehenderit natus atque error in veniam. Voluptatem ad explicabo ipsam doloribus officia dolor quibusdam soluta. Sequi veniam harum qui.",
+"2020-01-01T09:23:00.000",
+"https://loremflickr.com/640/480",
+4,
+15),
+
+("inventore quas consectetur",
+"Ea quas voluptates eveniet. Officia mollitia blanditiis ipsam commodi in perspiciatis quaerat. Eaque ex quas. Sequi nihil omnis maxime amet. Alias commodi ut illum ducimus similique accusantium perferendis nesciunt atque. Delectus eius quaerat itaque.
+Voluptate maxime ullam ipsum. Animi a illo fuga dignissimos atque. Modi saepe ducimus eveniet doloribus. Quos quidem quibusdam eos officia. Autem modi labore adipisci molestiae ipsum ducimus perferendis. Vero fuga eum reiciendis.
+Repellat illum quisquam soluta quod eum animi cum. Dolore a deleniti facere. Dolorem culpa fuga fugit maiores earum cum voluptate voluptas odit. Inventore sequi soluta atque magnam recusandae nam tenetur. Reiciendis ea modi corporis architecto.",
+"2020-01-01T09:24:00.000",
+"https://loremflickr.com/640/480",
+5,
+1),
+
+("provident iusto iure",
+"Quasi molestias magnam facere atque consequatur voluptates. Temporibus quas repellat repudiandae repellendus vitae. Dolorum repudiandae repellat ipsum ipsa deserunt cumque nemo veritatis.
+Porro vitae libero maiores voluptatem non illum. Ex similique magnam. Incidunt non ex molestiae officiis culpa veniam laudantium nemo nobis. Aut molestias repellat illum odit porro deleniti officia omnis delectus. Magnam architecto facere. Dolore magnam at pariatur repellat voluptates.
+Numquam quo numquam voluptatibus dolores optio. In quos numquam quos ipsa optio quo quo odio. Iste occaecati rerum delectus possimus doloribus. Magni ab dolor vel doloremque.",
+"2020-01-01T09:25:00.000",
+"https://loremflickr.com/640/480",
+6,
+2),
+
+("harum deserunt quo",
+"Suscipit quis ratione voluptatibus. Necessitatibus debitis facere. Corrupti maiores expedita perferendis repellat fuga officia eos exercitationem nisi.
+Temporibus aliquam odio. Nesciunt odio repellendus ut culpa exercitationem ad. Amet quae voluptates vel officiis ratione dignissimos vero magni laborum. Dignissimos vitae non enim minus est esse voluptas aliquam. Recusandae a incidunt et soluta dolor. Atque delectus quaerat est earum nulla ea.
+Modi quo explicabo dicta nihil provident illum repellendus. Est doloremque est laborum iusto consequuntur maxime quis. Temporibus a impedit.",
+"2020-01-01T09:26:00.000",
+"https://loremflickr.com/640/480",
+7,
+3),
+
+("hic voluptatibus optio",
+"Veritatis minus impedit blanditiis hic necessitatibus dolores quae vel cupiditate. Maiores sunt culpa sequi non voluptas consectetur sapiente doloremque. Repellat sapiente possimus nesciunt perspiciatis tempore.
+Molestiae unde numquam assumenda officiis earum quas ipsam. Velit sed et ut assumenda ut molestiae recusandae pariatur. Expedita eum ratione accusamus unde similique. Minus at enim corrupti repellat.
+Inventore laudantium perspiciatis impedit error qui. Ullam voluptatibus ex. Laboriosam atque atque cumque suscipit atque blanditiis occaecati quod. Corporis ab enim id natus. Repudiandae cumque incidunt eaque repellendus est magni.",
+"2020-01-01T09:27:00.000",
+"https://loremflickr.com/640/480",
+8,
+4),
+
+("nobis rerum repellat",
+"Quaerat aut modi consequatur ullam modi ad reiciendis. Nulla veritatis praesentium tempore fugiat harum culpa optio ab. Nostrum laudantium beatae consequatur explicabo nostrum asperiores reiciendis deserunt ea. Dicta pariatur eaque nam vel nobis maiores.
+Optio cumque incidunt dolorem blanditiis a. Quas perspiciatis velit vel eveniet officia pariatur. Reiciendis doloremque adipisci.
+Recusandae magnam molestiae possimus accusamus quis eaque consequatur aliquid voluptas. Sint nemo rem cupiditate ea alias. Necessitatibus quae nam quo quasi labore exercitationem ipsum sunt. Est illum ipsam. Blanditiis deleniti repudiandae in aliquam blanditiis asperiores temporibus cumque.",
+"2020-01-01T09:28:00.000",
+"https://loremflickr.com/640/480",
+9,
+5);
+
+/* INSERTION DONNÉES COMMENTAIRES */
+INSERT INTO Commentaire (titre, contenu, date_publication, Id_blog, Id_utilisateur)
+VALUES
+("iure perferendis occaecati",
+"Eveniet iusto nostrum nam consectetur aspernatur similique maiores. Nesciunt modi dolorem laboriosam ex ipsam excepturi error magnam cupiditate. Adipisci consectetur quaerat libero voluptatibus cumque dolorum commodi suscipit. Placeat accusamus officiis labore odit tempora nemo ullam voluptatibus.
+Qui explicabo voluptate optio dolorem iste iste cumque vero vero. A sed atque ullam deserunt accusantium animi perspiciatis natus sunt. Quae necessitatibus soluta mollitia reprehenderit facere aperiam. Nam molestiae impedit nulla placeat assumenda fugit rerum. Incidunt placeat eos asperiores. Eum ratione quibusdam harum laudantium sequi quisquam consequatur aliquid animi.
+Fugiat debitis deleniti maxime. Temporibus esse architecto eligendi aliquam ad ipsam temporibus debitis exercitationem. Qui soluta assumenda voluptas. Sint ad perspiciatis aliquid voluptates eveniet inventore pariatur. Rem culpa animi cumque id.",
+"2020-01-01T09:09:00.000",
+7,
+3),
+
+("officia quis illum",
+"Saepe placeat amet aspernatur. Vel voluptatibus molestiae aliquid eaque quibusdam. Incidunt velit explicabo perspiciatis.
+Dignissimos reprehenderit provident deleniti fuga. Nisi voluptas nobis. Qui porro quaerat earum accusamus iure consequatur dignissimos consectetur ab. Magni nam dignissimos commodi aliquid tempore officia. Debitis ratione beatae corrupti eum architecto culpa odio soluta dolorum.
+Dignissimos debitis ipsam cupiditate eveniet tempore voluptate provident fugit ipsam. Itaque repellendus corporis reiciendis aspernatur nulla eum odit dolorum expedita. Nemo aut dolores sint excepturi illum. Cupiditate perspiciatis ducimus.",
+"2020-01-01T09:10:00.000",
+7,
+6),
+
+("est perferendis alias",
+"Doloremque accusamus voluptatibus perspiciatis beatae quibusdam sint. Iusto quo provident animi. Officiis soluta ex. Maxime esse quidem eaque rerum. Officia amet enim fugiat odio.
+Placeat itaque quibusdam aut quidem iste quia. Et ipsam unde illo ipsa. Similique nostrum adipisci accusamus reiciendis placeat a nostrum tempora nemo.
+Neque ducimus quasi sint ex occaecati esse excepturi dolorem. Occaecati illo explicabo vitae asperiores adipisci quis nostrum nulla. Maiores tempora harum officia aspernatur incidunt sunt nisi officia modi. Placeat recusandae eligendi ab labore. Cumque laboriosam eaque error praesentium dicta maiores ex dicta.",
+"2020-01-01T09:11:00.000",
+1,
+3),
+
+("architecto numquam necessitatibus",
+"Voluptatum saepe vero doloribus ipsa aspernatur. Voluptate voluptatibus exercitationem eveniet. Eaque quod nihil nam rem sit nesciunt error alias porro.
+Voluptate odio quas. Voluptatibus repellendus occaecati quos. Sint aspernatur consequatur quae at voluptatum nihil. Explicabo facere temporibus. Inventore sint eveniet iste deserunt.
+Error porro autem atque soluta. Consectetur libero voluptatem repellendus repudiandae. Nobis esse perspiciatis quae facilis totam aspernatur minima voluptate ab. Vel dolore at facere quas minima praesentium. Fugit est non voluptas quae.",
+"2020-01-01T09:12:00.000",
+4,
+7),
+
+("dolores rem hic",
+"Sed cupiditate illum a sapiente. Blanditiis sequi voluptatum error alias numquam repellat temporibus accusamus. Tempore ad tempore ullam totam iusto natus. Nihil eum suscipit vitae minus.
+Soluta adipisci repudiandae repellat beatae quae eos. Repudiandae possimus soluta. Dicta saepe ullam dolores repellendus quae necessitatibus.
+Blanditiis quas exercitationem molestiae molestiae. Laudantium cumque porro a perspiciatis accusamus expedita earum corporis eum. Ex fugit nisi non aperiam repellat magnam natus minus. Provident dicta harum necessitatibus atque dolores provident voluptatem similique. Optio quasi architecto tempore quam ipsam quos voluptas. Iure minima unde magni repellat velit facilis voluptates ipsa.",
+"2020-01-01T09:13:00.000",
+8,
+6),
+
+("esse sint at",
+"Provident quaerat dignissimos veritatis ea fugit ad asperiores. A reiciendis porro. Ab corporis vitae dolores.
+Voluptatem similique eaque necessitatibus inventore vel alias atque. Atque nobis odit. Nisi aperiam eligendi molestias quos fuga quas repudiandae saepe adipisci. Dicta exercitationem velit cupiditate. Deleniti facere fugit libero et ea corporis illo totam ipsum. Facere recusandae reprehenderit consequuntur unde maxime ducimus veniam suscipit eius.
+Porro alias quae amet dignissimos molestias. Adipisci aliquid magnam fugiat aperiam. Natus illum sequi. Veritatis nesciunt illo excepturi aliquid. Ipsam nesciunt qui placeat reiciendis voluptate et porro. A dolore aperiam.",
+"2020-01-01T09:14:00.000",
+8,
+3),
+
+("ut odit laudantium",
+"Perferendis blanditiis consequatur eius cumque praesentium accusantium sunt et maxime. Ab quam rem consequuntur repellendus. Aut ipsa magnam. Ex maxime debitis harum. Modi id placeat fugit dicta veritatis reprehenderit esse.
+Cumque fugit hic eveniet explicabo odit. Repudiandae totam possimus nulla est pariatur nulla rem. Dignissimos accusamus expedita sequi consectetur libero fugiat nostrum delectus necessitatibus. Quo nihil at veniam ullam libero consequuntur quos.
+Odit eaque a. Quasi eveniet nobis quibusdam dicta consectetur laboriosam alias. Repellat rerum deserunt a. Qui impedit aut. Sed cupiditate veniam recusandae maxime vitae.",
+"2020-01-01T09:15:00.000",
+6,
+5),
+
+("harum porro quod",
+"Inventore unde mollitia. Neque doloribus minima adipisci deleniti. Sint culpa quo. Fugiat dicta ab ad. Accusamus tenetur voluptates asperiores illo rerum adipisci.
+Velit dicta vitae quam. Veritatis distinctio quis explicabo ratione at perferendis. Debitis perferendis dolores maxime blanditiis eveniet dolores. Eveniet quas expedita culpa error ipsum a. Commodi saepe atque deleniti quam. Eius delectus corrupti unde expedita modi.
+Alias est natus magnam iste explicabo unde quidem. Earum maxime a enim maiores tempore possimus pariatur inventore quisquam. Praesentium necessitatibus accusantium rerum unde. Quos vel qui magni reprehenderit nihil dignissimos nesciunt sequi perspiciatis. Totam dolor labore enim vero fuga quibusdam.",
+"2020-01-01T09:16:00.000",
+8,
+7),
+
+("tempore reiciendis dolore",
+"Officia praesentium vero. Quo nemo similique culpa necessitatibus quasi beatae nam non aperiam. Unde nostrum possimus enim deserunt rerum placeat quasi. Molestiae facilis autem et. Saepe tempora illum optio. Libero expedita possimus.
+Iusto ratione repudiandae repellendus. Dolores doloremque eum consequatur cupiditate dolorum quaerat. Eos ipsa fuga pariatur dolorum. Facere praesentium quae officia excepturi fugit incidunt voluptates molestiae. Tenetur harum fuga dolore eos accusamus accusantium aliquam.
+Blanditiis sapiente saepe commodi. Ex rerum corrupti quis minima commodi dignissimos rerum nobis natus. Sequi facilis sint dignissimos minima asperiores deserunt dolor voluptatibus.",
+"2020-01-01T09:17:00.000",
+9,
+6),
+
+("qui nam eum",
+"Quo asperiores quos quibusdam libero doloremque tempora nam. Consequuntur iste ab molestiae magnam voluptatum amet. Porro repudiandae earum voluptatem temporibus rerum soluta quasi. Error temporibus repellat commodi quam.
+Minima quasi provident optio maiores fuga beatae nemo nulla autem. Suscipit ipsum deserunt architecto. Ullam aliquid earum eveniet blanditiis consequatur unde possimus dignissimos adipisci. Deleniti optio error. Consequuntur eaque quod reprehenderit iure debitis praesentium.
+Voluptas voluptate expedita. Necessitatibus labore nobis eos. Quae repudiandae ea ducimus.",
+"2020-01-01T09:18:00.000",
+8,
+6),
+
+("illo ab reprehenderit",
+"Quis magnam iusto laboriosam minus. Molestiae architecto maxime accusantium eaque neque. Accusantium nesciunt quos esse eaque nobis hic. Architecto repellendus id reprehenderit. Consequatur autem cumque.
+Perferendis assumenda modi incidunt nemo commodi perferendis. Inventore id enim. Architecto recusandae rerum minus atque doloremque mollitia tenetur vero dolorem. Sit fugit esse. Vel repudiandae eaque.
+Enim tenetur tenetur totam. Est commodi saepe mollitia hic nobis fuga ipsa ex dicta. Error mollitia sunt soluta quibusdam. Minus distinctio inventore similique distinctio sequi labore. Sit earum laboriosam quam numquam deserunt dolore illo consequatur. Assumenda voluptatem perferendis voluptatum similique voluptatem magnam.",
+"2020-01-01T09:19:00.000",
+6,
+2),
+
+("aliquid sunt laborum",
+"Natus saepe ducimus quas. Vitae tenetur vero quibusdam vel quasi ex aperiam magnam provident. Officiis ab repellat velit corporis non suscipit soluta.
+Molestiae aliquid illum architecto possimus nulla voluptatem. Eum dolorem animi vero debitis quae porro perspiciatis impedit. Totam nesciunt voluptatibus. Qui ad unde nemo tempore amet natus. Exercitationem quia ut facilis rerum debitis possimus facere eos. Voluptates consequuntur accusantium odit nam quasi quo eum libero assumenda.
+Neque at eligendi sint id sed quibusdam ex quas maxime. Repellendus accusantium ex impedit. Eveniet at recusandae voluptatum modi. Repudiandae veritatis occaecati at vero ipsum. Magnam aperiam veniam voluptates. Doloribus eos nostrum provident ipsam ipsum magnam.",
+"2020-01-01T09:20:00.000",
+1,
+1),
+
+("tempore recusandae reiciendis",
+"Laborum illo odit ducimus. Perferendis nemo quas earum repudiandae dignissimos. Accusamus ipsa nisi corporis minima. Tempora praesentium nemo eum commodi. Molestias dicta ipsa praesentium. Ipsa ut cum amet.
+Quidem laudantium magnam. Reiciendis adipisci quidem expedita totam. Dicta qui cupiditate. Deleniti mollitia iusto inventore. Unde ad iusto exercitationem qui repellendus autem.
+Pariatur ex dignissimos cupiditate reprehenderit. Cum earum deserunt quisquam impedit maiores quia necessitatibus necessitatibus expedita. Quas asperiores officiis error accusamus maiores beatae eligendi suscipit odio. Assumenda alias ab ipsa. Et veritatis sapiente assumenda in fuga molestias unde cupiditate.",
+"2020-01-01T09:21:00.000",
+5,
+9),
+
+("eveniet praesentium velit",
+"Eum asperiores maiores nulla quis dolore ut earum ut. Quia sint consectetur nobis dolor ab. Ipsum aspernatur minima maiores blanditiis quia quia officia. Sunt dolor ipsa vero recusandae necessitatibus quisquam. Quasi ipsum neque cum. Eveniet nam aspernatur doloremque itaque maxime occaecati earum.
+Ipsum adipisci qui quisquam perspiciatis. Beatae molestiae nesciunt at asperiores consectetur perferendis. Porro aliquam mollitia dignissimos perferendis. Dignissimos cum eius soluta. Ducimus ad necessitatibus. Magni exercitationem laborum perferendis eos quisquam voluptate voluptates.
+Officia deleniti voluptate. Quis repellat aliquam esse. Hic doloribus architecto. Enim natus ducimus numquam aspernatur quo impedit repellat magni.",
+"2020-01-01T09:22:00.000",
+5,
+9),
+
+("minima voluptatibus optio",
+"Doloremque natus molestiae nihil itaque harum dicta non. Debitis similique nulla molestias officia. Quod perferendis facere. Unde optio odit amet eveniet vero accusamus iste. Debitis in distinctio architecto pariatur fuga dignissimos voluptate. Deleniti excepturi voluptatibus qui ut sed.
+Corporis perspiciatis illum. Sequi alias cupiditate qui provident iure vero sapiente quibusdam. Architecto doloribus voluptatum atque hic hic incidunt. Eius eius facere reiciendis commodi. Repellendus quidem ea.
+Aliquid ipsum atque quisquam. Quo id sequi. Tenetur nisi nam. Possimus numquam voluptates ea explicabo maiores dignissimos.",
+"2020-01-01T09:23:00.000",
+5,
+4),
+
+("amet dolor alias",
+"Odit minima quia officiis itaque nostrum. Aliquid totam dignissimos culpa consectetur dolorem ullam facilis. Totam corporis perferendis magnam voluptas nesciunt. Atque nisi maiores a. Quaerat pariatur necessitatibus.
+Dolorem modi eligendi incidunt tenetur molestias recusandae. Laboriosam cumque ab. Odio ipsa labore dolor vel. Illo porro voluptatum tempora velit quisquam. Aut voluptatibus excepturi eligendi cum fuga quasi illo et.
+Assumenda illum nobis id quisquam iure eius recusandae tempora. Sed perspiciatis officia iure aut possimus. Sed id repellat sed omnis aspernatur perferendis in numquam. Ratione minima id nam fugit.",
+"2020-01-01T09:24:00.000",
+9,
+6),
+
+("enim nihil hic",
+"Et esse repellat quis vel enim. Deserunt voluptas suscipit nesciunt aperiam. Incidunt laborum architecto corporis deserunt provident provident in dolores. Tempore velit iure ipsa expedita similique sed voluptatem.
+Officiis eligendi mollitia atque nemo. Repellat fuga quasi voluptatem unde rem. Occaecati corporis perspiciatis facere. Quis sit atque dignissimos quis esse. Molestias consectetur rerum esse corporis neque labore labore sapiente. Corporis quia consequuntur commodi maxime autem quod eligendi officiis.
+Voluptas nam ex quisquam voluptates. Aliquam quaerat modi sunt molestias eligendi. Sed accusantium perspiciatis asperiores fugit assumenda ea blanditiis itaque. Temporibus delectus nam et eum eveniet aliquam. Delectus magni quas porro temporibus corrupti dolores placeat. Nam sunt nesciunt odit ea tenetur fuga deleniti minus.",
+"2020-01-01T09:25:00.000",
+3,
+6),
+
+("dolorum quam ipsam",
+"Repellendus quasi iure. Illo occaecati doloribus repellendus optio. Officia earum atque omnis. Sequi id fugiat labore sint. Maiores earum dolore sequi debitis nihil iusto quaerat.
+Consequatur et cumque facilis atque. Harum impedit occaecati. Unde cupiditate dignissimos saepe libero debitis perspiciatis corrupti veritatis voluptatum. Laudantium nobis incidunt vel vitae. Distinctio odio eius laudantium pariatur cumque nobis assumenda blanditiis odio. Quae laudantium sapiente nemo.
+Ad nisi rerum. Fuga sunt adipisci. Pariatur voluptatibus quisquam expedita laborum atque laborum vero. Praesentium provident sit nemo accusamus cum consectetur animi. Id excepturi quam est sequi neque atque. Voluptas possimus aut possimus ut culpa placeat officiis minus accusamus.",
+"2020-01-01T09:26:00.000",
+3,
+1),
+
+("explicabo asperiores ut",
+"Debitis nulla consequuntur praesentium provident ratione veritatis eligendi voluptate. Aperiam adipisci dicta. Temporibus similique placeat amet optio quae maxime neque voluptate. Officia repellat nam illum omnis voluptatibus quis esse sapiente quibusdam. Mollitia unde unde at quo ratione consequatur quia hic.
+Voluptatibus placeat repudiandae nemo. Alias maxime voluptatum illum soluta sunt ratione. In aliquid officiis atque consequatur nesciunt perspiciatis natus molestiae. Nihil aut consectetur.
+Praesentium enim accusantium porro reiciendis molestias recusandae excepturi. Odio optio ea impedit sit adipisci. Ipsam sapiente dicta qui incidunt.",
+"2020-01-01T09:27:00.000",
+3,
+7),
+
+("aliquid voluptatibus nobis",
+"Sed repudiandae sunt. Dolores reiciendis ut debitis ab. Voluptates fugit illum qui quia ut accusantium nesciunt delectus tempore. Aliquam culpa animi culpa iste pariatur nostrum sequi accusamus nulla. Commodi earum aspernatur veniam.
+Nihil consequatur ratione accusantium. A sapiente ducimus perferendis. Iusto natus atque sed. Eaque quis aut quam. Natus nemo eveniet asperiores asperiores libero odit id iste. Perferendis velit quod.
+Placeat eos quaerat omnis animi cumque. Laborum soluta molestias est saepe facere porro. Tempora sit ipsam. Tempore quaerat itaque atque iste deserunt odio ipsa.",
+"2020-01-01T09:28:00.000",
+3,
+9),
+
+("veniam necessitatibus quaerat",
+"Porro dolores incidunt ea at vel porro laborum. Sit eveniet enim at optio est adipisci. Nihil ex placeat a laboriosam.
+Velit mollitia eveniet distinctio dolores molestias. Aliquam magnam iste vero exercitationem voluptatem ipsum. Officiis nostrum doloribus blanditiis quod odit explicabo impedit. Nobis consequatur voluptatem cum sunt dolore eaque cum quod doloribus. Alias quod tenetur labore corporis rerum velit ullam dignissimos libero.
+Aut laborum doloremque necessitatibus voluptate amet veritatis. Iure necessitatibus esse illo recusandae eum distinctio doloremque. Ipsa eius reiciendis itaque assumenda rem est excepturi. Saepe adipisci est perferendis. Earum velit voluptatum doloribus rerum sit inventore eveniet officia. Distinctio eaque recusandae saepe vitae molestiae laborum exercitationem.",
+"2020-01-01T09:29:00.000",
+8,
+9),
+
+("occaecati vero deleniti",
+"Occaecati dolores recusandae. Eum voluptatum fugit dolore. Praesentium officiis odit ad at voluptatibus quasi. Nisi inventore laboriosam velit.
+Eveniet itaque maiores. Ullam quibusdam qui nisi. Consectetur quisquam blanditiis adipisci magnam. Natus nemo a neque quaerat soluta. Repellendus molestiae fugit qui iure ut.
+Aspernatur alias tempora ut voluptas ea animi. Suscipit ea illum enim quia. Quia autem quos voluptatibus. Nemo iusto dicta sed. Molestias at suscipit recusandae assumenda voluptate dicta cumque fuga. Illo laboriosam magni.",
+"2020-01-01T09:30:00.000",
+5,
+7),
+
+("tenetur eum dolore",
+"Distinctio atque animi voluptatibus. Repellendus voluptatum quidem officia. Nihil libero commodi alias deleniti. Fuga accusamus adipisci natus nesciunt fugiat exercitationem nesciunt ad. Eos repellat et.
+Excepturi mollitia aspernatur at debitis quis. Alias perferendis aliquam quod vitae quidem. Delectus similique necessitatibus alias eum impedit fugiat optio reiciendis libero. Hic ipsam quo nesciunt iusto illo ipsum eaque. Voluptatum autem a nulla ratione amet accusantium. Quibusdam nam aperiam non qui voluptatem cupiditate optio.
+Odio aliquam error. Distinctio saepe odio quia ex animi numquam vitae consectetur. Veniam molestias necessitatibus hic assumenda earum earum non animi.",
+"2020-01-01T09:31:00.000",
+1,
+1),
+
+("est fugit ipsum",
+"Recusandae accusantium iusto magni modi quibusdam veritatis error pariatur soluta. Iure sunt expedita ipsa id maiores ut. Exercitationem quo labore. Autem impedit accusantium corrupti error dolore delectus. Reprehenderit ullam non odio nesciunt cupiditate laudantium nam aliquid. Ad dolores cupiditate voluptatibus accusamus ducimus placeat eaque voluptas cumque.
+Quasi dolores eveniet explicabo corporis velit id. Consequatur modi sapiente ad nostrum itaque. Harum veritatis sequi accusamus ad temporibus reiciendis voluptatum ducimus. Harum sed magnam est praesentium odio a sunt ipsa modi. Esse explicabo blanditiis recusandae impedit. Est debitis amet.
+Vero assumenda iusto ut similique eligendi sapiente architecto doloremque. Nesciunt accusamus hic. Beatae modi corporis. Ad sed fuga. Eveniet itaque fugit rerum incidunt consequuntur laboriosam porro in eveniet. Quae nulla ut quaerat maiores.",
+"2020-01-01T09:32:00.000",
+2,
+7),
+
+("id ipsam praesentium",
+"Corporis ullam error architecto possimus deleniti quae. Id commodi eligendi saepe repudiandae corporis suscipit. Inventore soluta commodi amet facere.
+Repellat cumque nemo. Nostrum deleniti explicabo aperiam quo iusto. Temporibus sed itaque laboriosam error alias praesentium illum. Quaerat nostrum maxime illo beatae recusandae voluptatibus quas error.
+Quo suscipit consequatur reprehenderit iure inventore pariatur. Distinctio totam voluptates nam expedita. Dolorem dignissimos beatae repudiandae dolore excepturi ipsum occaecati mollitia. Accusamus consectetur nemo suscipit facere a officiis quae. Quas veritatis temporibus. Magni ea cumque velit nisi dicta quo aliquam totam.",
+"2020-01-01T09:33:00.000",
+9,
+9),
+
+("omnis perspiciatis nihil",
+"Placeat a rem deleniti consectetur facilis tenetur facilis modi libero. Alias beatae amet inventore rerum inventore. Quos sint ad. Illum odio voluptatibus.
+Iusto ratione accusamus doloribus eveniet aliquid. Occaecati praesentium optio consequuntur. Corrupti ex voluptas quas expedita sed est vero modi aut. Et occaecati cum nulla. Error nesciunt nisi quos expedita excepturi accusamus laboriosam. Ullam tenetur sit facere molestiae.
+Cumque perspiciatis quaerat debitis pariatur mollitia nisi aliquid sit provident. Numquam autem sint nam ratione quidem mollitia dignissimos illum. Eos similique placeat possimus dolorem assumenda ex delectus sunt adipisci. Tempora quidem quos soluta modi soluta sed saepe. Accusantium earum ipsum velit culpa veniam quasi at minus aut. Hic dicta labore.",
+"2020-01-01T09:34:00.000",
+6,
+3),
+
+("commodi sint eaque",
+"Laudantium molestiae nemo. Velit assumenda esse dolor et ipsum ut omnis quia. Iste commodi eveniet possimus minus accusamus minus dolores hic. Accusamus accusantium iure dolorem ea ut iusto laudantium vitae ea.
+Soluta laboriosam exercitationem pariatur consectetur possimus rem. Assumenda ipsum assumenda officia aspernatur. Quis nulla non molestiae illum corrupti in. Debitis possimus eius voluptates. Eveniet quasi facilis magnam perferendis consequatur aperiam molestiae.
+Doloremque nemo rerum minus accusantium temporibus quibusdam blanditiis nesciunt. Vero qui quo rerum. Corporis sint sed aperiam sapiente rerum impedit modi molestias aliquid. Cupiditate repellat dolor autem corporis ratione quae aut unde laudantium.",
+"2020-01-01T09:35:00.000",
+2,
+7),
+
+("molestias molestias omnis",
+"Nam aut vitae ab est. Deserunt repellendus cumque impedit nemo voluptates exercitationem magnam. Ratione ullam odit aperiam quam asperiores deleniti esse laudantium commodi. Quos accusamus vero perferendis illum rem.
+Ea quisquam vel aliquid dolor eius fugit expedita perspiciatis laudantium. Dolore dignissimos architecto impedit est quaerat eveniet necessitatibus. Tenetur rerum debitis laboriosam. Ut odio aperiam facere eos iste accusantium rem molestiae qui.
+Magni ea saepe magnam accusantium inventore unde exercitationem aut quidem. Nemo praesentium aliquam officia deleniti. Dolore deleniti excepturi quisquam ipsa nemo recusandae. Facere ducimus atque iure amet id eius.",
+"2020-01-01T09:36:00.000",
+2,
+6),
+
+("earum nihil voluptate",
+"Eaque soluta laborum. Minus nisi quas commodi repellat. Architecto ipsam placeat sunt.
+Laboriosam harum eveniet quam autem excepturi quo quae. Unde soluta rem. Officiis repellendus consectetur. Velit ullam quidem hic ullam fugit. Deserunt ea sit vel.
+Maxime odio expedita provident mollitia ea. Rem consequatur autem molestias quam ipsa. Blanditiis doloribus eum debitis beatae modi consectetur nisi.",
+"2020-01-01T09:37:00.000",
+6,
+4),
+
+("culpa sint quibusdam",
+"Cumque eligendi nobis ex perspiciatis vitae iusto nostrum provident ex. Odio dolores quos et quaerat corrupti ullam pariatur earum. Aperiam ullam repellendus ut exercitationem.
+Nemo numquam deserunt porro sequi consequatur ab. Ducimus quidem quam ab quasi laborum. Quis repellendus eum quos nostrum odit. Vero cupiditate officiis officia quos earum corporis rem laborum adipisci. Repudiandae id quisquam suscipit voluptatibus deserunt libero.
+Unde ipsa mollitia laudantium eaque voluptate. Quia ea necessitatibus assumenda voluptatibus error. Accusantium vitae architecto repellat exercitationem aliquid repellendus cumque a. Nobis maxime dolor quidem temporibus aspernatur unde. Nesciunt nobis accusantium sapiente consectetur veritatis ex explicabo perferendis. In quos eaque molestias itaque voluptates hic architecto debitis.",
+"2020-01-01T09:38:00.000",
+6,
+2);
+
+/* INSERTION DONNÉES LIKE */
+INSERT INTO likes (Id_blog, Id_utilisateur)
+VALUES
+(3,2),
+(9,7),
+(2,8),
+(1,1),
+(8,7),
+(9,6),
+(5,4),
+(3,7),
+(8,5),
+(8,9),
+(2,4),
+(7,3),
+(2,2),
+(4,9),
+(3,4),
+(6,5),
+(9,9),
+(2,9),
+(8,1),
+(3,7),
+(1,5),
+(6,6),
+(8,5),
+(7,8),
+(7,7),
+(9,4),
+(4,4),
+(4,8),
+(7,5),
+(3,8);
