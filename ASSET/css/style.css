@@ -1,0 +1,177 @@
+:root {
+    --Bleu: #56AEF5;
+    --BleuFonce: #2480E9;
+    --Noir: #484343;
+    --Gris: #DDDDDD;
+    --BleuDegrade: linear-gradient(to bottom right, var(--BleuFonce), var(--Bleu));
+}
+
+/* ---------- SITE GLOBAL ---------- */
+.none {
+    display: none !important;
+}
+
+body {
+    padding: 0 150px;
+}
+
+.text_24_black {
+    text-decoration: none;
+    font-size: 24px;
+    font-family: 'Farro';
+    color: var(--Noir);
+    padding: 0;
+    margin: 0;
+}
+
+.text_24_white {
+    text-decoration: none;
+    font-size: 24px;
+    font-family: 'Farro';
+    color: white;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    font-family: 'Farro';
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Farro';
+    padding: 0;
+    margin: 0;
+}
+
+/* ----- CARD BLOG ----- */
+.card_blog {
+    width: 375px;
+    border: 1.5px solid var(--Noir);
+}
+
+.card_blog img {
+    width: 375px;
+    height: 257px;
+    object-fit: cover;
+}
+
+.card_blog .contenu {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.card_blog h3 {
+    color: var(--Noir);
+    font-size: 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-bottom: 5px;
+}
+
+.card_blog p {
+    background-image: linear-gradient(to bottom, var(--Noir) 60%, white);
+    color: transparent;
+    background-clip: text;
+    font-size: 22px;
+    overflow: hidden;
+    height: 219px;
+}
+
+.card_blog a {
+    font-size: 22px;
+    background: var(--Gris);
+    color: var(--Noir);
+    letter-spacing: 3.3px;
+    text-align: center;
+    font-weight: 100;
+    border-radius: 10px;
+    width: 100%;
+    padding: 11px 0;
+    transition: 0.2s;
+}
+
+.card_blog a:hover {
+    background: var(--BleuDegrade);
+    color: white;
+}
+
+/* ---------- HEADER ---------- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 150px;
+}
+
+.header_nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+#header_logo {
+    width: 80px;
+    height: 80px;
+}
+
+.header_btn_create {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 17.5px;
+    font-family: 'Farro';
+    color: white;
+    background: var(--BleuDegrade);
+    border-radius: 10px;
+    padding: 8px 18px;
+}
+
+.header_nav_menu {
+    display: flex;
+    position: absolute;
+    top: 65px;
+    left: 355px;
+    background-color: white;
+    border-radius: 5px;
+    gap: 5px;
+    padding: 5px;
+    width: 16%;
+}
+
+.header_nav_menu a:hover {
+    background-image: var(--BleuDegrade);
+    color: transparent;
+    background-clip: text;
+}
+
+.header_nav_menu form {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}
+
+.header_nav_menu input {
+    font-size: 24px;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #F0F0F0;
+    width: 70%;
+}
+
+.header_nav_menu button {
+    background: var(--BleuDegrade);
+    color: white;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #F0F0F0;
+    cursor: pointer;
+}
