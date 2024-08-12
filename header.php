@@ -3,11 +3,6 @@ session_start();
 
 require_once(__dir__ . '/sql/dataBase/dataBaseConnect.php');
 
-$sqlQuery = 'SELECT * FROM blog WHERE is_valid is NULL';
-$selectBlog = $mysqlClient->prepare($sqlQuery);
-$selectBlog->execute();
-$blogs = $selectBlog->fetchAll();
-
 $queryCategorie = 'SELECT nom FROM categorie';
 $selectCategorie = $mysqlClient->prepare($queryCategorie);
 $selectCategorie->execute();
@@ -59,12 +54,6 @@ $categories = $selectCategorie->fetchAll();
                 </form>
             </li>
         </ul>
-    </div>
-
-    <div>
-        <?php foreach($blogs as $blog): ?>
-            <?php include(__dir__ . '/partials/_card_blog.php'); ?>
-        <?php endforeach ?>
     </div>
 </body>
 </html>

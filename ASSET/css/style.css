@@ -175,3 +175,22 @@ header {
     border: 1px solid #F0F0F0;
     cursor: pointer;
 }
+
+/* ---------- ACCUEIL ----------*/
+.accueil_carroussel_all {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.accueil_carroussel_all svg {
+    margin: 0 25px;
+    cursor: pointer;
+}
+
+.accueil_carroussel {
+    display: flex;
+    flex-direction: row;
+    width: 377px;
+    overflow: hidden;
+}
