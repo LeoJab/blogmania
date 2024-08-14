@@ -14,9 +14,9 @@ SELECT * FROM Blog WHERE is_valid IS NOT FALSE;
 /* Les blogs récent */
 SELECT * FROM Blog WHERE is_valid IS NOT FALSE ORDER BY date_ajout ASC LIMIT 9;
 /* Le top des blogs */
-SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_blog = Likes.Id_blog WHERE is_valid IS NOT FALSE GROUP BY Likes.Id_Blog ORDER BY COUNT(Likes.Id_blog) DESC LIMIT 6
-/* 6 blogs aléatoires */
-SELECT * FROM Blog WHERE is_valid IS NOT FALSE ORDER BY RAND() LIMIT 6;
+SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_blog = Likes.Id_blog WHERE is_valid IS NOT FALSE GROUP BY Likes.Id_Blog ORDER BY COUNT(Likes.Id_blog) DESC LIMIT 9;
+/* Le blog le plus populaire */
+SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_Blog = Likes.Id_blog GROUP BY Blog.Id_blog HAVING COUNT(Likes.Id_blog) >= (SELECT COUNT(Likes.Id_Blog) / COUNT(DISTINCT Likes.Id_Blog) FROM Likes) ORDER BY RAND() LIMIT 1;
 /* Tous les blogs d’un utilisateur */
 SELECT * FROM Blog WHERE id_utilisateur = 1;
 /* Tous les blogs d’une catégorie */
