@@ -1,21 +1,25 @@
 <?php
 require_once(__dir__ . "/header.php");
 
-$queryBlogPlusPop = ('SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_Blog = Likes.Id_blog GROUP BY Blog.Id_blog HAVING COUNT(Likes.Id_blog) >= (SELECT COUNT(Likes.Id_Blog) / COUNT(DISTINCT Likes.Id_Blog) FROM Likes) ORDER BY RAND() LIMIT 1');
+// QUERY DU BLOG LE PLUS POPULAIRE
+$queryBlogPlusPop = ('SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_Blog = Likes.Id_blog WHERE Blog.is_valid IS NOT FALSE GROUP BY Blog.Id_blog HAVING COUNT(Likes.Id_blog) >= (SELECT COUNT(Likes.Id_Blog) / COUNT(DISTINCT Likes.Id_Blog) FROM Likes) ORDER BY RAND() LIMIT 1;');
 $selectBlogPlusPop = $mysqlClient->prepare($queryBlogPlusPop);
 $selectBlogPlusPop->execute();
 $blogPlusPop = $selectBlogPlusPop->fetchAll();
 
+// QUERY TOP DES BLOGS
 $queryTopBlog = ('SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_blog = Likes.Id_blog WHERE is_valid IS NOT FALSE GROUP BY Likes.Id_Blog ORDER BY COUNT(Likes.Id_blog) DESC LIMIT 9');
 $selectTopBlog = $mysqlClient->prepare($queryTopBlog);
 $selectTopBlog->execute();
 $topBlogs = $selectTopBlog->fetchAll();
 
+// QUERY TOUTES LES CATEGORIES
 $queryCategorie = ('SELECT * FROM Categorie');
 $selectCategorie = $mysqlClient->prepare($queryCategorie);
 $selectCategorie->execute();
 $categories = $selectCategorie->fetchAll();
 
+// QUERY LES BLOGS LES PLUS RECENTS
 $queryBlogRecent = ('SELECT * FROM Blog WHERE is_valid IS NOT FALSE ORDER BY date_ajout ASC LIMIT 9;');
 $selectBlogRecent = $mysqlClient->prepare($queryBlogRecent);
 $selectBlogRecent->execute();
@@ -40,6 +44,9 @@ $blogRecents = $selectBlogRecent->fetchAll();
         </a>
     </div>
 </div>
+
 <?php include(__dir__ . '/partials/_top_blog.php') ?>
 <?php include(__dir__ . '/partials/_categorie.php') ?>
 <?php include(__dir__ . '/partials/_blog_recent.php') ?>
+
+<?php require_once(__dir__ . '/footer.php') ?>

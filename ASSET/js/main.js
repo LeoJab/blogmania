@@ -25,17 +25,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // SECTION BTN
-    const btnSvgSection = document.querySelectorAll('.svg');
+    const btnSvgSectionBlog = document.querySelectorAll('.svg_blog');
+    const btnSvgSectionCategorie = document.querySelector('.svg_categorie');
     const sectionBlogs = document.querySelectorAll('.section_blogs');
-    console.log(btnSvgSection, sectionBlogs);
+    const sectionCategories = document.querySelector('.section_categories');
+    console.log(btnSvgSectionBlog, sectionBlogs, sectionCategories);
 
-    // SVG [0]
-    btnSvgSection[0].addEventListener('click', () => {
+    // SVG [0] SECTION BLOG
+    btnSvgSectionBlog[0].addEventListener('click', () => {
         console.log('SVG Click');
-        if(btnSvgSection.classList != 'active') {
-            btnSvgSection[0].classList.toggle('active');
+        if(btnSvgSectionBlog.classList != 'active') {
+            btnSvgSectionBlog[0].classList.toggle('active');
         } else {
-            btnSvgSection[0].classList.toggle('active');
+            btnSvgSectionBlog[0].classList.toggle('active');
         };
 
         if(sectionBlogs[0].classList != 'active') {
@@ -45,13 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     });
 
-    // SVG [1]
-    btnSvgSection[1].addEventListener('click', () => {
+    // SVG [1] SECTION BLOG
+    btnSvgSectionBlog[1].addEventListener('click', () => {
         console.log('SVG Click');
-        if(btnSvgSection.classList != 'active') {
-            btnSvgSection[1].classList.toggle('active');
+        if(btnSvgSectionBlog.classList != 'active') {
+            btnSvgSectionBlog[1].classList.toggle('active');
         } else {
-            btnSvgSection[1].classList.toggle('active');
+            btnSvgSectionBlog[1].classList.toggle('active');
         };
 
         if(sectionBlogs[1].classList != 'active') {
@@ -61,19 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     });
 
-    // SVG [2]
-    btnSvgSection[2].addEventListener('click', () => {
+    // SVG SECTION CATEGORIE
+    btnSvgSectionCategorie.addEventListener('click', () => {
         console.log('SVG Click');
-        if(btnSvgSection.classList != 'active') {
-            btnSvgSection[2].classList.toggle('active');
+        if(btnSvgSectionCategorie.classList != 'active') {
+            btnSvgSectionCategorie.classList.toggle('active');
         } else {
-            btnSvgSection[2].classList.toggle('active');
+            btnSvgSectionCategorie.classList.toggle('active');
         };
 
-        if(sectionBlogs[2].classList != 'active') {
-            sectionBlogs[2].classList.toggle('active');
+        if(sectionCategories.classList != 'active') {
+            sectionCategories.classList.toggle('active');
         } else {
-            sectionBlogs[2].classList.toggle('active');
+            sectionCategories.classList.toggle('active');
         };
     });
 })

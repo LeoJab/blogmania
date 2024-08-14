@@ -6,7 +6,9 @@ SELECT * FROM Utilisateur WHERE is_valid is NULL;
 /* Les utilisateurs is_valid = 0 */
 SELECT * FROM Utilisateur WHERE is_valid IS FALSE;
 /* Les informations de l’utilisateur */
-SELECT * FROM Utilisateur WHERE id = 1;
+SELECT * FROM Utilisateur WHERE id_utilisateur = 1;
+/* Les informations d'un utilisateur d'un blog */
+SELECT Utilisateur.* FROM Utilisateur INNER JOIN Blog ON Blog.Id_utilisateur = Utilisateur.Id_utilisateur WHERE Blog.Id_blog = 1;
 
 /* ---------- REQUETE BLOG ---------- */
 /* Tous les blogs */
@@ -16,7 +18,7 @@ SELECT * FROM Blog WHERE is_valid IS NOT FALSE ORDER BY date_ajout ASC LIMIT 9;
 /* Le top des blogs */
 SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_blog = Likes.Id_blog WHERE is_valid IS NOT FALSE GROUP BY Likes.Id_Blog ORDER BY COUNT(Likes.Id_blog) DESC LIMIT 9;
 /* Le blog le plus populaire */
-SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_Blog = Likes.Id_blog GROUP BY Blog.Id_blog HAVING COUNT(Likes.Id_blog) >= (SELECT COUNT(Likes.Id_Blog) / COUNT(DISTINCT Likes.Id_Blog) FROM Likes) ORDER BY RAND() LIMIT 1;
+SELECT Commentaire.*, utilisateur.pseudo FROM Commentaire INNER JOIN utilisateur ON utilisateur.id_utilisateur = commentaire.Id_Utilisateur WHERE commentaire.is_valid IS NOT FALSE AND id_Blog = 1
 /* Tous les blogs d’un utilisateur */
 SELECT * FROM Blog WHERE id_utilisateur = 1;
 /* Tous les blogs d’une catégorie */
@@ -24,6 +26,7 @@ SELECT * FROM Blog WHERE is_valid IS NOT FALSE AND id_categorie = 1;
 /* Les blogs récent d’une catégorie */
 SELECT * FROM Blog WHERE is_valid IS NOT FALSE AND id_categorie = 1 ORDER BY date_ajout ASC;
 /* Les top blogs d’une catégorie */
+SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_blog = Likes.Id_blog WHERE is_valid IS NOT FALSE AND id_categorie = 1 GROUP BY Likes.Id_Blog ORDER BY COUNT(Likes.Id_blog) DESC LIMIT 9;
 /* Les blogs is_valid is NULL */
 SELECT * FROM Blog WHERE is_valid IS NULL;
 /* Les blogs is_valid = 0 */
@@ -35,7 +38,7 @@ SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_blog = Likes.Id_blog WHERE L
 
 /* ---------- REQUETE COMMENTAIRE ---------- */
 /* Tous les commentaire d’un blog */
-SELECT * FROM Commentaire WHERE is_valid IS NOT FALSE AND id_blog = 1;
+SELECT Commentaire.*, Utilisateur.* FROM Commentaire INNER JOIN Utilisateur ON Utilisateur.Id_utilisateur = Commentaire.Id_Utilisateur WHERE Commentaire.Is_valid IS NOT FALSE AND Commentaire.Id_blog = 1 ORDER BY Commentaire.Date_publication ASC;
 /* Les commentaires d’un utilisateur + info blog */
 SELECT * FROM Commentaire INNER JOIN Blog ON Commentaire.id_blog = Blog.id_blog WHERE id_utilisateur = 1;
 /* Les commentaires is_valid is NULL */

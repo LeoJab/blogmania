@@ -3,7 +3,8 @@ session_start();
 
 require_once(__dir__ . '/sql/dataBase/dataBaseConnect.php');
 
-$queryCategorie = 'SELECT nom FROM categorie';
+// QUERY TOUTES LES CATEGORIES
+$queryCategorie = 'SELECT * FROM categorie';
 $selectCategorie = $mysqlClient->prepare($queryCategorie);
 $selectCategorie->execute();
 $categories = $selectCategorie->fetchAll();
@@ -26,11 +27,12 @@ $categories = $selectCategorie->fetchAll();
     <title>BlogMania</title>
 </head>
 <body>
+    <div id="border">
     <header>
         <div class="header_nav">
             <img id="header_logo" src="ASSET/img/logo.png" alt="Logo du site">
-            <a class="text_24_black" href="#">Accueil</a>
-            <a id="btnHeaderBlog" class="text_24_black" href="#">Blogs</a>   
+            <a class="text_24_black" href="/accueil.php">Accueil</a>
+            <p id="btnHeaderBlog" class="text_24_black">Blogs</p>   
             <a class="text_24_black" href="#">Contact</a>
         </div>
         <div class="header_nav">
@@ -45,7 +47,7 @@ $categories = $selectCategorie->fetchAll();
         <ul>
             <li><a class="text_24_black" href="#">Plus récent</a></li>
             <?php foreach($categories as $categorie): ?>
-                <li><a class="text_24_black" href="#"><?php echo $categorie["nom"] ?></a></li>
+                <li><a class="text_24_black" href="/categorie.php?id=<?php echo $categorie['Id_Categorie'] ?>"><?php echo $categorie["nom"] ?></a></li>
             <?php endforeach ?>
             <li><a class="text_24_black" href="#">Top des Blogs</a></li>
             <li>
