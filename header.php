@@ -36,7 +36,7 @@ $categories = $selectCategorie->fetchAll();
             <a class="text_24_black" href="#">Contact</a>
         </div>
         <div class="header_nav">
-            <a class="text_24_black" href="#">CONNEXION</a>
+            <a class="text_24_black" href="/connexion.php">CONNEXION</a>
             <a class="btn_create" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
                 CRÉER MON BLOG
