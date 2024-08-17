@@ -9,6 +9,12 @@ SELECT * FROM Utilisateur WHERE is_valid IS FALSE;
 SELECT * FROM Utilisateur WHERE id_utilisateur = 1;
 /* Les informations d'un utilisateur d'un blog */
 SELECT Utilisateur.* FROM Utilisateur INNER JOIN Blog ON Blog.Id_utilisateur = Utilisateur.Id_utilisateur WHERE Blog.Id_blog = 1;
+/* Compte du nombre de blogs d'un utilisateur */
+SELECT COUNT(id_blog) FROM blog WHERE id_utilisateur = 1
+/* Compte du nombre de blogs likés d'un utilisateur */
+SELECT COUNT(id_blog) FROM Likes WHERE id_utilisateur = 1
+/* Compte du nombre de commentaires publiés d'un utilisateur */
+SELECT COUNT(id_commentaire) FROM Commentaire WHERE id_utilisateur = 1
 
 /* ---------- REQUETE BLOG ---------- */
 /* Tous les blogs */

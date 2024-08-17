@@ -33,6 +33,13 @@ p, h1, h2, h3, h4, h5, h6 {
     margin: 0 !important;
 }
 
+.separation {
+    border-bottom: 2px solid;
+    border-image: var(--BleuDegrade) 1;
+    padding-bottom: 35px;
+    margin-bottom: 20px;
+}
+
 .text_16_black_light {
     font-size: 18px;
     font-family: 'Farro';
@@ -73,6 +80,12 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .text_26_black {
     font-size: 24px;
+    font-family: 'Farro';
+    color: var(--Noir);
+}
+
+.text_30_black_light {
+    font-size: 30px;
     font-family: 'Farro';
     color: var(--Noir);
 }
@@ -250,13 +263,14 @@ p, h1, h2, h3, h4, h5, h6 {
     color: var(--Noir);
     font-size: 24px;
     margin-left: 10px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .formulaire input {
     border: 0.5px solid var(--Noir);
     font-size: 22px;
     width: 500px;
+    height: 100%;
 }
 
 .formulaire .btn_gris {
@@ -275,6 +289,48 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .formulaire .double input {
     width: 97.5%;
+}
+
+.formulaire .date {
+    width: 248.63px !important;
+}
+
+.formulaire .file {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulaire .file label {
+    padding-left: 0;
+}
+
+.formulaire input[type=file]::file-selector-button {
+    margin-right: 8px;
+    border: none;
+    background: var(--BleuDegrade);
+    color: white;
+    cursor: pointer;
+}
+
+.formulaire textarea {
+    height: 200px;
+}
+
+.formulaire img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.formulaire .pp {
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.formulaire .error {
+    color: red;
 }
 
 /* ----- SECTION: Top Blog /Blog Recent / Tous Blogs / Categorie -----*/
@@ -554,4 +610,13 @@ footer #reseaux svg {
     width: 12%;
     border-radius: 5px;
     margin: 0 5px 5px 0;
+}
+
+/* ---------- MON COMPTE ---------- */
+#mon_compte ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px !important;
 }

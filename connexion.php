@@ -11,6 +11,7 @@
         <input type="text" name="password">
     </div>
     <button class="btn_gris" type="submit">Connexion</button>
+    <a class="text_16_black_light" href="/inscription.php">Pas de compte ?</a>
 </form>
 <?php
     include_once(__dir__ . '/footer.php')

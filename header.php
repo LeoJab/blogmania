@@ -33,11 +33,11 @@ $categories = $selectCategorie->fetchAll();
             <img id="header_logo" src="ASSET/img/logo.png" alt="Logo du site">
             <a class="text_24_black" href="/accueil.php">Accueil</a>
             <p id="btnHeaderBlog" class="text_24_black">Blogs</p>   
-            <a class="text_24_black" href="#">Contact</a>
+            <a class="text_24_black" href="/contact.php">Contact</a>
         </div>
         <div class="header_nav">
             <a class="text_24_black" href="/connexion.php">CONNEXION</a>
-            <a class="btn_create" href="#">
+            <a class="btn_create" href="/add_blog.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
                 CRÉER MON BLOG
             </a>

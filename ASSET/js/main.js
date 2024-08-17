@@ -6,23 +6,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuHeaderBlog = document.querySelector('#menuHeaderBlog');
     console.log(btnHeaderBlog, menuHeaderBlog);
 
-    btnHeaderBlog.addEventListener('mouseover', () => {
-        console.log('survole');
+    if(btnHeaderBlog) {
+        btnHeaderBlog.addEventListener('mouseover', () => {
+            console.log('survole');
 
-        if(menuHeaderBlog.classList == 'none') {
-            menuHeaderBlog.classList.toggle('none');
-        } else {
-            menuHeaderBlog.classList.toggle('none');
-        }
-    });
+            if(menuHeaderBlog.classList == 'none') {
+                menuHeaderBlog.classList.toggle('none');
+            } else {
+                menuHeaderBlog.classList.toggle('none');
+            }
+        });
+    };
 
-    menuHeaderBlog.addEventListener('mouseout', () => {
-        if(menuHeaderBlog.classList == 'none') {
-            menuHeaderBlog.classList.toggle('none');
-        } else {
-            menuHeaderBlog.classList.toggle('none');
-        }
-    });
+    if(menuHeaderBlog) {
+        menuHeaderBlog.addEventListener('mouseout', () => {
+            if(menuHeaderBlog.classList == 'none') {
+                menuHeaderBlog.classList.toggle('none');
+            } else {
+                menuHeaderBlog.classList.toggle('none');
+            }
+        });
+    };
 
     // SECTION BTN
     const btnSvgSectionBlog = document.querySelectorAll('.svg_blog');
@@ -32,50 +36,82 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(btnSvgSectionBlog, sectionBlogs, sectionCategories);
 
     // SVG [0] SECTION BLOG
-    btnSvgSectionBlog[0].addEventListener('click', () => {
-        console.log('SVG Click');
-        if(btnSvgSectionBlog.classList != 'active') {
-            btnSvgSectionBlog[0].classList.toggle('active');
-        } else {
-            btnSvgSectionBlog[0].classList.toggle('active');
-        };
+    if(btnSvgSectionBlog[0]) {
+        btnSvgSectionBlog[0].addEventListener('click', () => {
+            console.log('SVG Click');
+            if(btnSvgSectionBlog.classList != 'active') {
+                btnSvgSectionBlog[0].classList.toggle('active');
+            } else {
+                btnSvgSectionBlog[0].classList.toggle('active');
+            };
 
-        if(sectionBlogs[0].classList != 'active') {
-            sectionBlogs[0].classList.toggle('active');
-        } else {
-            sectionBlogs[0].classList.toggle('active');
-        };
-    });
+            if(sectionBlogs[0].classList != 'active') {
+                sectionBlogs[0].classList.toggle('active');
+            } else {
+                sectionBlogs[0].classList.toggle('active');
+            };
+        });
+    };
 
     // SVG [1] SECTION BLOG
-    btnSvgSectionBlog[1].addEventListener('click', () => {
-        console.log('SVG Click');
-        if(btnSvgSectionBlog.classList != 'active') {
-            btnSvgSectionBlog[1].classList.toggle('active');
-        } else {
-            btnSvgSectionBlog[1].classList.toggle('active');
-        };
+    if(btnSvgSectionBlog[1]) {
+        btnSvgSectionBlog[1].addEventListener('click', () => {
+            console.log('SVG Click');
+            if(btnSvgSectionBlog.classList != 'active') {
+                btnSvgSectionBlog[1].classList.toggle('active');
+            } else {
+                btnSvgSectionBlog[1].classList.toggle('active');
+            };
 
-        if(sectionBlogs[1].classList != 'active') {
-            sectionBlogs[1].classList.toggle('active');
-        } else {
-            sectionBlogs[1].classList.toggle('active');
-        };
-    });
+            if(sectionBlogs[1].classList != 'active') {
+                sectionBlogs[1].classList.toggle('active');
+            } else {
+                sectionBlogs[1].classList.toggle('active');
+            };
+        });
+    };
 
     // SVG SECTION CATEGORIE
-    btnSvgSectionCategorie.addEventListener('click', () => {
-        console.log('SVG Click');
-        if(btnSvgSectionCategorie.classList != 'active') {
-            btnSvgSectionCategorie.classList.toggle('active');
-        } else {
-            btnSvgSectionCategorie.classList.toggle('active');
-        };
+    if(btnSvgSectionCategorie) {
+        btnSvgSectionCategorie.addEventListener('click', () => {
+            console.log('SVG Click');
+            if(btnSvgSectionCategorie.classList != 'active') {
+                btnSvgSectionCategorie.classList.toggle('active');
+            } else {
+                btnSvgSectionCategorie.classList.toggle('active');
+            };
 
-        if(sectionCategories.classList != 'active') {
-            sectionCategories.classList.toggle('active');
-        } else {
-            sectionCategories.classList.toggle('active');
-        };
-    });
+            if(sectionCategories.classList != 'active') {
+                sectionCategories.classList.toggle('active');
+            } else {
+                sectionCategories.classList.toggle('active');
+            };
+        });
+    };
+
+    //AFFICHAGE DE L'IMAGE APRES L'UPLOAD BLOG ET UTILISATEUR
+    const input = document.querySelector('#image');
+    const image = document.querySelector('#preview');
+    const regexImg = /\.jpeg|png|webp$/i;
+    console.log(input, image);
+
+    if(input) {
+        input.addEventListener('change', (event) => {
+            console.log('Change !');
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            console.log(file);
+
+            /*if(!regexImg.test(file)) {
+                document.querySelector('#errImg').innerHTML = 'Votre image doit etre en format JPEG, PNG ou WEBP';
+                return false;
+            } else {*/
+                reader.onload = function(e) {
+                    image.src = e.target.result;
+                };
+    
+                reader.readAsDataURL(file);
+            //}
+        });
+    };
 })

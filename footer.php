@@ -7,11 +7,11 @@
         <h4>Plan du site</h4>
         <ul>
             <li><a href="/accueil.php">Accueil</a></li>
-            <li><a href="#">Créer mon blog</a></li>
-            <li><a href="#">Inscription</a></li>
-            <li><a href="#">Connexion</a></li>
+            <li><a href="/add_blog.php">Créer mon blog</a></li>
+            <li><a href="/inscription.php">Inscription</a></li>
+            <li><a href="/connexion.php">Connexion</a></li>
             <li><a href="#">Mon compte</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/contact.php">Contact</a></li>
         </ul>
     </div>
     <div>
@@ -37,7 +37,7 @@
                 <h2>Créer votre blog avec</h2>
                 <h1>BlogMania</h1>
             </div>
-            <a class="btn_create" href="#">
+            <a class="btn_create" href="/add_blog.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
                 CRÉER MON BLOG
             </a>
