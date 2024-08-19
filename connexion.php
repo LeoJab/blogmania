@@ -3,12 +3,12 @@
 ?>
 <h1 class="titre_90_blue">BlogMania</h1>
 <h2 class="titre_64_black">Connexion</h2>
-<form class="formulaire" action="#" method="POST">
+<form class="formulaire" action="/script/script_connexion.php" method="POST">
     <div class="label_input">
         <label for="email_pseudo">Pseudo ou Email</label>
         <input type="text" name="email_pseudo">
         <label for="password">Mot de passe</label>
-        <input type="text" name="password">
+        <input type="password" name="password">
     </div>
     <button class="btn_gris" type="submit">Connexion</button>
     <a class="text_16_black_light" href="/inscription.php">Pas de compte ?</a>

@@ -12,6 +12,10 @@
     display: none !important;
 }
 
+.block {
+    display: block !important;
+}
+
 #border {
     padding: 0 300px;
 }
@@ -269,8 +273,7 @@ p, h1, h2, h3, h4, h5, h6 {
 .formulaire input {
     border: 0.5px solid var(--Noir);
     font-size: 22px;
-    width: 500px;
-    height: 100%;
+    width: 100%;
 }
 
 .formulaire .btn_gris {
@@ -350,6 +353,14 @@ p, h1, h2, h3, h4, h5, h6 {
     gap: 25px;
     height: 590px;
     overflow: hidden;
+}
+
+.section_blogs_all {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
 }
 
 .section_categories {
@@ -619,4 +630,41 @@ footer #reseaux svg {
     justify-content: center;
     gap: 40px;
     margin-bottom: 40px !important;
+}
+
+.card_mes_blogs {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+}
+
+.card_mes_blogs .btn {
+    display: flex;
+    flex-direction: column;
+    background: var(--BleuDegrade);
+    border-radius: 0 10px 10px 0;
+    padding: 5px 5px;
+    gap: 5px;
+}
+
+.card_mes_blogs .btn svg {
+    color: white;
+}
+
+.popup_encart {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba( 0, 0, 0, .25 )
+}
+
+.popup_contenu {
+position: absolute;
+top: 75%;
+left: 50%;
+padding: 25px;
+background: white;
+transform: translate(-50%, -50%)
 }

@@ -60,7 +60,7 @@ switch($page) {
         $selectBlog->execute([
             'id' => $id,
         ]);
-        $blogs = $selectBlog->fetch();
+        $blogs = $selectBlog->fetchAll();
         
         include(__dir__ . '/partials/_mes_blogs.php');
         break;

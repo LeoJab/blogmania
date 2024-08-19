@@ -2,6 +2,7 @@
 session_start();
 
 require_once(__dir__ . '/sql/dataBase/dataBaseConnect.php');
+require_once(__dir__ . '/function.php');
 
 // QUERY TOUTES LES CATEGORIES
 $queryCategorie = 'SELECT * FROM categorie';
@@ -36,7 +37,12 @@ $categories = $selectCategorie->fetchAll();
             <a class="text_24_black" href="/contact.php">Contact</a>
         </div>
         <div class="header_nav">
-            <a class="text_24_black" href="/connexion.php">CONNEXION</a>
+            <?php if(!isset($_SESSION['LOGGED_USER'])): ?>
+                <a class="text_24_black" href="/connexion.php">CONNEXION</a>
+            <?php endif; ?>
+            <?php if(isset($_SESSION['LOGGED_USER'])): ?>
+                <a class="text_24_black" href="/mon_compte.php?page=mes_informations">MON COMPTE</a>
+            <?php endif; ?>
             <a class="btn_create" href="/add_blog.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
                 CRÉER MON BLOG

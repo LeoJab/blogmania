@@ -2,6 +2,7 @@
 require_once(__dir__ . '/header.php');
 
 $idBlog = $_GET['id'];
+$idUti = 2;
 
 // QUERY LE BLOG SELON L'ID
 $querySelectBlog = ('SELECT * FROM Blog WHERE is_valid IS NOT FALSE AND Id_Blog = :id;');
@@ -34,10 +35,36 @@ $selectCompteurCommentaire->execute([
     'id' => $idBlog,
 ]);
 $compteurCommentaires = $selectCompteurCommentaire->fetch();
+
+// VERIFIACTION LIKE
+$isLiked = false;
+$querySelectLikes = ('SELECT id_likes FROM Likes WHERE Id_Utilisateur = :idUti AND Id_Blog = :idBlog');
+$selectLikes = $mysqlClient->prepare($querySelectLikes);
+$selectLikes->execute([
+    'idUti' => $idUti,
+    'idBlog' => $idBlog,
+]);
+$likes = $selectLikes->fetch();
+
+if($likes != NULL) {
+    $isLiked = true;
+}
 ?>
 
 <div class="blog">
     <img src="<?php echo $blog['image']; ?>" alt="Image du Blog">
+    <div>
+        <?php if($isLiked == false): ?>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+        <?php endif ?>
+        <?php if($isLiked == true): ?>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+        <?php endif ?>
+    </div>
     <h1 class="titre_64_black"><?php echo $blog['titre']; ?></h1>
     <p class="text_22_black"><?php echo $blog['contenu']; ?></p>
     <div class="info">
