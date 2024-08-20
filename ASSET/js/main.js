@@ -120,63 +120,63 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // POPUP ESPACE MON COMPTE
-    // Commentaire
-    const popupCom = document.querySelectorAll("#popupCom");
-    const btnPopupCom = document.querySelectorAll('#btnPopupCom');
-    const btnPopupComClose = document.querySelectorAll('#btnPopupComClose');
-    console.log(popupCom, btnPopupCom, btnPopupComClose);
-
-    //for(var i = 0; i <= btnPopupCom.length; i++) {
-        btnPopupCom[0].addEventListener('click', () => {
-            if(popupCom[0].classList = 'none') {
-                console.log('Popup !');
-                popupCom[0].classList.toggle('none');
+    // Edit blog
+    const btnsEditsBlogs = document.querySelectorAll(".btnPopupEditBlog");
+    console.log('btnsEdit:', btnsEditsBlogs);
+    for(const btn of btnsEditsBlogs) {
+        btn.addEventListener('click', () => {
+            const popupTarget = btn.getAttribute('data-target'); ; // Ou btn.getAttribute('data-target-popup');
+            const popup = document.querySelector(popupTarget); // Retourne la <div class="none" id="popupCom-1">...</div> par exemple
+            console.log('popupTarget:', popupTarget, 'popup:', popup);
+            if(popup.classList = 'none') {
+                popup.classList.remove('none');
+            } else {
+                popup.classList.add('none');
             }
+            // ou popup.classlist.toggle('none'); sans le if/else ça devrait marcher
+            const btnClose = popup.querySelector('.btnPopupEditBlogClose'); // recherche dans la popup en cours, l'élément  avec la class btnPopupComClose
+            console.log('btnClose:', btnClose);
+            btnClose.addEventListener('click', () => {
+                popup.classList.toggle('none'); // ou popup.classList.toggle('none'); ça devrait marcher aussi, à test
+            });
         });
-
-        btnPopupComClose[0].addEventListener('click', () => {
-            popupCom[0].classList.toggle('none');
-        });
-    //};
+    }
 
     // Blog
-    const popupBlog = document.querySelectorAll("#popupBlog");
-    const btnPopupBlog = document.querySelectorAll('#btnPopupBlog');
-    const btnPopupBlogClose = document.querySelectorAll('#btnPopupBlogClose');
-    console.log(popupBlog, btnPopupBlog, btnPopupBlogClose);
-
-    //for(var i = 0; i = btnPopupBlog.length; i++) {
-        btnPopupBlog[0].addEventListener('click', () => {
-            if(popupBlog[0].classList = 'none') {
-                console.log('Popup !');
-                popupBlog[0].classList.toggle('none');
+    const btnsBlogs = document.querySelectorAll(".btnPopupBlog");
+    for(const btn of btnsBlogs) {
+        btn.addEventListener('click', () => {
+            const popupTarget = btn.getAttribute('data-target'); // Ou btn.getAttribute('data-target-popup');
+            const popup = document.querySelector(popupTarget); // Retourne la <div class="none" id="popupCom-1">...</div> par exemple
+            if(popup.classList = 'none') {
+                popup.classList.remove('none');
+            } else {
+                popup.classList.add('none');
             }
+            // ou popup.classlist.toggle('none'); sans le if/else ça devrait marcher
+            const btnClose = popup.querySelector('.btnPopupBlogClose'); // recherche dans la popup en cours, l'élément  avec la class btnPopupComClose
+            btnClose.addEventListener('click', () => {
+                popup.classList.toggle('none'); // ou popup.classList.toggle('none'); ça devrait marcher aussi, à test
+            });
         });
+    }
 
-        btnPopupBlogClose[0].addEventListener('click', () => {
-            popupBlog[0].classList.toggle('none');
-        });
-    //};
-
-    // Edit Blog
-    const popupEditBlog = document.querySelectorAll("#popupEditBlog");
-    const btnPopupEditBlog = document.querySelectorAll('#btnPopupEditBlog');
-    const btnPopupEditBlogClose = document.querySelectorAll('#btnPopupEditBlogClose');
-    console.log(popupEditBlog, btnPopupEditBlog, btnPopupEditBlogClose);
-
-    //let i = 0;
-    //while(i <= btnPopupEditBlog.length) {
-        btnPopupEditBlog[0].addEventListener('click', () => {
-            if(popupEditBlog[0].classList = 'none') {
-                console.log('Popup !');
-                popupEditBlog[0].classList.toggle('none');
+    // Commentaire
+    const btnsComs = document.querySelectorAll(".btnPopupCom");
+    for(const btn of btnsComs) {
+        btn.addEventListener('click', () => {
+            const popupTarget = btn.getAttribute('data-target'); // Ou btn.getAttribute('data-target-popup');
+            const popup = document.querySelector(popupTarget); // Retourne la <div class="none" id="popupCom-1">...</div> par exemple
+            if(popup.classList = 'none') {
+                popup.classList.remove('none');
+            } else {
+                popup.classList.add('none');
             }
+            // ou popup.classlist.toggle('none'); sans le if/else ça devrait marcher
+            const btnClose = popup.querySelector('.btnPopupComClose'); // recherche dans la popup en cours, l'élément  avec la class btnPopupComClose
+            btnClose.addEventListener('click', () => {
+                popup.classList.toggle('none'); // ou popup.classList.toggle('none'); ça devrait marcher aussi, à test
+            });
         });
-
-        btnPopupEditBlogClose[0].addEventListener('click', () => {
-            popupEditBlog[0].classList.toggle('none');
-        });
-
-        //i++;
-    //}
+    }
 })

@@ -17,7 +17,7 @@ function commentaireIdBlog($idBlog) {
 function blog($idBlog) {
     global $mysqlClient;
     // QUERY BLOG SELON L'ID EN PARAMETRE
-    $querySelectBlog = ('SELECT * FROM Blog WHERE is_valid IS NOT FALSE AND Id_Blog = :id;');
+    $querySelectBlog = ('SELECT * FROM Blog WHERE Id_Blog = :id;');
     $selectSelectBlog = $mysqlClient->prepare($querySelectBlog);
     $selectSelectBlog->execute([
         'id' => $idBlog,
@@ -47,7 +47,7 @@ function blog($idBlog) {
 function editBlog($idBlog) {
     global $mysqlClient;
     // QUERY BLOG SELON L'ID EN PARAMETRE
-    $querySelectBlog = ('SELECT * FROM Blog WHERE is_valid IS NOT FALSE AND Id_Blog = :id;');
+    $querySelectBlog = ('SELECT * FROM Blog WHERE Id_Blog = :id;');
     $selectSelectBlog = $mysqlClient->prepare($querySelectBlog);
     $selectSelectBlog->execute([
         'id' => $idBlog,
