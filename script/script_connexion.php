@@ -1,7 +1,12 @@
-<?php
+﻿<?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 session_start();
 
 require_once(__dir__ . '/../sql/dataBase/dataBaseConnect.php');
+
 
 $querySelectAllUsers = ('SELECT * FROM Utilisateur');
 $selectAllUsers = $mysqlClient->prepare($querySelectAllUsers);
@@ -11,6 +16,7 @@ $allUsers = $selectAllUsers->fetchAll();
 $postData = $_POST;
 
 if (isset($postData['email']) && isset($postData['password'])) {
+    var_dump[$postData];
     if (!filter_var($postData['email'], FILTER_VALIDATE_EMAIL)) {
         $_SESSION['LOGIN_ERROR_MESSAGE'] = 'Il faut une email valide pour se connecter';
     } else {
@@ -19,12 +25,13 @@ if (isset($postData['email']) && isset($postData['password'])) {
                 $user['email'] === $postData['email'] &&
                 $user['password'] === $postData['password']
             ) {
+                session_start();
                 $_SESSION['LOGGED_USER'] = [
                     'email' => $user['email'],
-                    'idUti' => $user['id_utilisateur'],
+                    'idUti' => $user['Id_Utilisateur'],
                 ];
-
-                header('Location: /../accueil.php');
+                header('Location: accueil.php');
+                exit;
             }
         }
 
@@ -34,8 +41,6 @@ if (isset($postData['email']) && isset($postData['password'])) {
                 $postData['email'],
                 strip_tags($postData['password'])
             );
-        }
+        }  
     }
-
-    header('Location: /../accueil.php');
 }

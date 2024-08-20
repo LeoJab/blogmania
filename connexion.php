@@ -1,9 +1,14 @@
 <?php
-    include_once(__dir__ . '/header.php')
+    include_once(__dir__ . '/header.php');
 ?>
 <h1 class="titre_90_blue">BlogMania</h1>
 <h2 class="titre_64_black">Connexion</h2>
-<form class="formulaire" action="/script/script_connexion.php" method="POST">
+<form class="formulaire" action="connexion.php" method="POST" enctype='multipart/form-data'>
+    <?php if(isset($_SESSION['LOGIN_ERROR_MESSAGE'] )) {
+        echo $_SESSION['LOGIN_ERROR_MESSAGE'];
+    }
+    ?>
+    <?php echo $_SESSION['LOGGED_USER']['email'] ?>
     <div class="label_input">
         <label for="email_pseudo">Pseudo ou Email</label>
         <input type="text" name="email_pseudo">

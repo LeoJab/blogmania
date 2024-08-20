@@ -4,6 +4,10 @@ session_start();
 require_once(__dir__ . '/sql/dataBase/dataBaseConnect.php');
 require_once(__dir__ . '/function.php');
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 // QUERY TOUTES LES CATEGORIES
 $queryCategorie = 'SELECT * FROM categorie';
 $selectCategorie = $mysqlClient->prepare($queryCategorie);
