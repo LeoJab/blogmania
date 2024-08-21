@@ -2,7 +2,7 @@
 require_once(__dir__ . '/header.php');
 
 $idBlog = $_GET['id'];
-$idUti = 2;
+$idUti = $_SESSION['LOGGED_USER']['idUti'];
 
 // QUERY LE BLOG SELON L'ID
 $querySelectBlog = ('SELECT * FROM Blog WHERE is_valid IS NOT FALSE AND Id_Blog = :id;');
@@ -10,7 +10,7 @@ $selectSelectBlog = $mysqlClient->prepare($querySelectBlog);
 $selectSelectBlog->execute([
     'id' => $idBlog,
 ]);
-$blog = $selectSelectBlog->fetch();
+$blog = $selectSelectBlog->fetch(PDO::FETCH_ASSOC);
 
 // QUERY INFORMATIONS DU CREATEUR DU BLOG
 $querySelectInfoUti = ('SELECT Utilisateur.* FROM Utilisateur INNER JOIN Blog ON Blog.Id_utilisateur = Utilisateur.Id_utilisateur WHERE Blog.Id_blog = :id;');
@@ -37,7 +37,7 @@ $selectCompteurCommentaire->execute([
 $compteurCommentaires = $selectCompteurCommentaire->fetch();
 
 // VERIFIACTION LIKE
-$isLiked = false;
+$isLiked = true;
 $querySelectLikes = ('SELECT id_likes FROM Likes WHERE Id_Utilisateur = :idUti AND Id_Blog = :idBlog');
 $selectLikes = $mysqlClient->prepare($querySelectLikes);
 $selectLikes->execute([
@@ -46,8 +46,8 @@ $selectLikes->execute([
 ]);
 $likes = $selectLikes->fetch();
 
-if($likes != NULL) {
-    $isLiked = true;
+if($likes == NULL) {
+    $isLiked = false;
 }
 ?>
 
@@ -56,17 +56,24 @@ if($likes != NULL) {
     <div>
         <?php if($isLiked == false): ?>
             <div>
-                <form action="" method="POST">
-                    <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></button>
+                <form class="form_like" action="/script/script_add_like.php" method="POST">
+                    <input type="hidden" name="id_blog" value="<?php echo $blog['Id_Blog'] ?>">
+                    <button type="submit"><svg class="blog_like" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></button>
                 </form>
             </div>
         <?php endif ?>
         <?php if($isLiked == true): ?>
             <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                <form class="form_like" action="/script/script_remove_like.php" method="POST">
+                    <input type="hidden" name="id_blog" value="<?php echo $blog['Id_Blog'] ?>">
+                    <button type="submit"><svg class="blog_liked" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></button>
+                </form>
             </div>
         <?php endif ?>
     </div>
+    <?php if(isset($_SESSION['LIKE_ERROR_MESSAGE'])): ?>
+           <p class="error"><?php echo $_SESSION['LIKE_ERROR_MESSAGE']; ?></p>
+    <?php endif; ?>
     <h1 class="titre_64_black"><?php echo $blog['titre']; ?></h1>
     <p class="text_22_black"><?php echo $blog['contenu']; ?></p>
     <div class="info">

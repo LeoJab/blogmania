@@ -5,6 +5,7 @@
     --Gris: #DDDDDD;
     --GrisClaire: #F6F6F6;
     --BleuDegrade: linear-gradient(to bottom right, var(--BleuFonce), var(--Bleu));
+    --red: #FF5C5C;
 }
 
 /* ---------- SITE GLOBAL ---------- */
@@ -140,6 +141,10 @@ p, h1, h2, h3, h4, h5, h6 {
     color: white;
     background: var(--BleuDegrade);
     transition: 0.2s;
+}
+
+.error {
+    color: red !important;
 }
 
 /* ----- CARD BLOG ----- */
@@ -330,10 +335,6 @@ p, h1, h2, h3, h4, h5, h6 {
     margin-top: 10px;
     width: 100px;
     height: 100px;
-}
-
-.formulaire .error {
-    color: red;
 }
 
 /* ----- SECTION: Top Blog /Blog Recent / Tous Blogs / Categorie -----*/
@@ -628,6 +629,24 @@ footer #reseaux svg {
     width: 12%;
     border-radius: 5px;
     margin: 0 5px 5px 0;
+}
+
+.form_like {
+    text-align: end;
+}
+
+.form_like button {
+    background-color: white;
+    border: none;
+}
+
+.blog_like {
+    stroke: var(--red);
+}
+
+.blog_liked {
+    stroke: var(--red);
+    fill: var(--red);
 }
 
 /* ---------- MON COMPTE ---------- */
