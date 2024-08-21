@@ -452,6 +452,13 @@ header {
     cursor: pointer;
 }
 
+header .btnLogout {
+    color: var(--Noir);
+    border: 1.5px solid var(--Noir);
+    padding: 5px;
+    border-radius: 5px;
+}
+
 /* ---------- FOOTER --------- */
 footer {
     background-color: var(--GrisClaire);

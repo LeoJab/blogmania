@@ -51,6 +51,9 @@ $categories = $selectCategorie->fetchAll();
                 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
                 CRÉER MON BLOG
             </a>
+            <?php if(isset($_SESSION['LOGGED_USER'])): ?>
+                <a class="btnLogout" href="/script/script_deconnexion.php"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-to-line"><path d="M17 12H3"/><path d="m11 18 6-6-6-6"/><path d="M21 5v14"/></svg></a>
+            <?php endif; ?>
         </div>
     </header>
     <div id="menuHeaderBlog" class="header_nav_menu none">
