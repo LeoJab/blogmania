@@ -16,7 +16,6 @@ $allUsers = $selectAllUsers->fetchAll();
 $postData = $_POST;
 
 if (isset($postData['email']) && isset($postData['password'])) {
-    var_dump[$postData];
     if (!filter_var($postData['email'], FILTER_VALIDATE_EMAIL)) {
         $_SESSION['LOGIN_ERROR_MESSAGE'] = 'Il faut une email valide pour se connecter';
     } else {
@@ -30,8 +29,8 @@ if (isset($postData['email']) && isset($postData['password'])) {
                     'email' => $user['email'],
                     'idUti' => $user['Id_Utilisateur'],
                 ];
-                header('Location: accueil.php');
-                exit;
+                header('Location: /../accueil.php');
+                exit();
             }
         }
 

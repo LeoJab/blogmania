@@ -3,15 +3,18 @@
 ?>
 <h1 class="titre_90_blue">BlogMania</h1>
 <h2 class="titre_64_black">Connexion</h2>
-<form class="formulaire" action="connexion.php" method="POST" enctype='multipart/form-data'>
+<form class="formulaire" action="/script/script_connexion.php" method="POST" enctype='multipart/form-data'>
     <?php if(isset($_SESSION['LOGIN_ERROR_MESSAGE'] )) {
         echo $_SESSION['LOGIN_ERROR_MESSAGE'];
-    }
+    };
     ?>
-    <?php echo $_SESSION['LOGGED_USER']['email'] ?>
+    <?php if(isset($_SESSION['LOGGED_USER'] )) {
+        echo $_SESSION['LOGGED_USER']['email'];
+    };
+    ?>
     <div class="label_input">
-        <label for="email_pseudo">Pseudo ou Email</label>
-        <input type="text" name="email_pseudo">
+        <label for="email">Email</label>
+        <input type="text" name="email">
         <label for="password">Mot de passe</label>
         <input type="password" name="password">
     </div>
