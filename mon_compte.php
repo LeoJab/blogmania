@@ -2,29 +2,29 @@
 require_once(__dir__ . '/header.php');
 
 $page = $_GET['page'];
-$id = 1;
+$idUti = $_SESSION['LOGGED_USER']['idUti'];
 
 // Nombre de blogs de l'utilisateur
-$sqlQuery = 'SELECT COUNT(id_blog) AS count FROM blog WHERE id_utilisateur = :id';
+$sqlQuery = 'SELECT COUNT(id_blog) AS count FROM blog WHERE id_utilisateur = :idUti';
 $selectNbrBlogs = $mysqlClient->prepare($sqlQuery);
 $selectNbrBlogs->execute([
-    'id' => $id,
+    'idUti' => $idUti,
 ]);
 $nbrBlogs = $selectNbrBlogs->fetch();
 
 // Nombre de blogs likés de l'utilisateur
-$sqlQuery = 'SELECT COUNT(id_blog) AS count FROM Likes WHERE id_utilisateur = :id';
+$sqlQuery = 'SELECT COUNT(id_blog) AS count FROM Likes WHERE id_utilisateur = :idUti';
 $selectNbrBlogsLikes = $mysqlClient->prepare($sqlQuery);
 $selectNbrBlogsLikes->execute([
-    'id' => $id,
+    'idUti' => $idUti,
 ]);
 $nbrBlogsLikes = $selectNbrBlogsLikes->fetch();
 
 // Nombre de commentaires de l'utilisateur
-$sqlQuery = 'SELECT COUNT(id_commentaire) AS count FROM Commentaire WHERE id_utilisateur = :id';
+$sqlQuery = 'SELECT COUNT(id_commentaire) AS count FROM Commentaire WHERE id_utilisateur = :idUti';
 $selectNbrCommentaires = $mysqlClient->prepare($sqlQuery);
 $selectNbrCommentaires->execute([
-    'id' => $id,
+    'idUti' => $idUti,
 ]);
 $nbrCommentaires = $selectNbrCommentaires->fetch();
 ?>
@@ -44,10 +44,10 @@ $nbrCommentaires = $selectNbrCommentaires->fetch();
 switch($page) {
     case 'mes_informations':
         // Recupération des informations de l'utilisateur selon l'id récupérer en session
-        $sqlQuery = 'SELECT * FROM Utilisateur WHERE id_utilisateur = :id';
+        $sqlQuery = 'SELECT * FROM Utilisateur WHERE id_utilisateur = :idUti';
         $selectUtiInfo = $mysqlClient->prepare($sqlQuery);
         $selectUtiInfo->execute([
-            'id' => $id,
+            'idUti' => $idUti,
         ]);
         $utiInfo = $selectUtiInfo->fetch();
 
@@ -55,10 +55,10 @@ switch($page) {
         break;
     case 'mes_blogs':
         // Recupération des blogs de l'utilisateur selon l'id récupérer en session
-        $sqlQuery = 'SELECT * FROM Blog WHERE id_utilisateur = :id';
+        $sqlQuery = 'SELECT * FROM Blog WHERE id_utilisateur = :idUti';
         $selectBlog = $mysqlClient->prepare($sqlQuery);
         $selectBlog->execute([
-            'id' => $id,
+            'idUti' => $idUti,
         ]);
         $blogs = $selectBlog->fetchAll();
         
@@ -66,23 +66,23 @@ switch($page) {
         break;
     case 'mes_blogs_likes':
         // Recupération des blogs likés de l'utilisateur selon l'id récupérer en session
-        $sqlQuery = 'SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_blog = Likes.Id_blog WHERE Likes.Id_utilisateur = :id';
+        $sqlQuery = 'SELECT Blog.* FROM Likes INNER JOIN Blog ON Blog.Id_blog = Likes.Id_blog WHERE Likes.Id_utilisateur = :idUti';
         $selectBlog = $mysqlClient->prepare($sqlQuery);
         $selectBlog->execute([
-            'id' => $id,
+            'idUti' => $idUti,
         ]);
-        $blogs = $selectBlog->fetch();
+        $blogs = $selectBlog->fetchAll();
         
         include(__dir__ . '/partials/_mes_blogs_likes.php');
         break;
     case 'mes_commentaires':
         // Recupération des commentaires postés par l'utilisateur selon l'id récupérer en session
-        $sqlQuery = 'SELECT * FROM Commentaire INNER JOIN Blog ON Commentaire.id_blog = Blog.id_blog WHERE commentaire.id_utilisateur = :id';
-        $selectCommentaire = $mysqlClient->prepare($sqlQuery);
+        $querySelectCommentaire = ('SELECT Commentaire.*, utilisateur.* FROM Commentaire INNER JOIN utilisateur ON utilisateur.id_utilisateur = commentaire.Id_Utilisateur WHERE commentaire.id_utilisateur = :idUti ORDER BY Commentaire.Date_publication ASC;');
+        $selectCommentaire = $mysqlClient->prepare($querySelectCommentaire);
         $selectCommentaire->execute([
-            'id' => $id,
+            'idUti' => $idUti,
         ]);
-        $commentaires = $selectCommentaire->fetch();
+        $commentaires = $selectCommentaire->fetchAll();
         
         include(__dir__ . '/partials/_mes_commentaires.php');
         break;
