@@ -49,6 +49,9 @@ $likes = $selectLikes->fetch();
 if($likes == NULL) {
     $isLiked = false;
 }
+
+// AJOUT D'UN COMMENTAIRE
+
 ?>
 
 <div class="blog">
@@ -86,14 +89,21 @@ if($likes == NULL) {
     <div class="blog_commentaires">
         <div class="publie">
             <p class="text_26_black">Publié un commentaire</p>
-            <form action="#" method="POST">
+            <form action="/script/script_add_commentaire.php?idBlog=<?php echo $blog['Id_Blog'] ?>" method="POST">
                 <div class="titre_contenu">
-                    <input type="text" name="titre" placeholder="Titre du commentaire..">
+                    <input type="text" name="titre" placeholder="Titre du commentaire.." required>
                     <span></span>
-                    <textarea class='contenu' name="contenu" placeholder="Votre commentaire.."></textarea>
+                    <textarea class='contenu' name="contenu" placeholder="Votre commentaire.." required></textarea>
                 </div>
                 <button type="submit">Envoyer</button>
             </form>
+            <span class="error">
+                <?php
+                    if(isset($_SESSION['ERROR_MESSAGE_ADD_COMMENTAIRE'])) {
+                        echo $_SESSION['ERROR_MESSAGE_ADD_COMMENTAIRE'];
+                    }
+                ?>
+            </span>
         </div>
         <?php foreach($commentaires as $commentaire): ?>
             <?php include(__dir__ . '/partials/_card_commentaire.php') ?>
