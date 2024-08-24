@@ -91,7 +91,7 @@ if($likes == NULL) {
             <p class="text_26_black">Publié un commentaire</p>
             <form action="/script/script_add_commentaire.php?idBlog=<?php echo $blog['Id_Blog'] ?>" method="POST">
                 <div class="titre_contenu">
-                    <input type="text" name="titre" placeholder="Titre du commentaire.." required>
+                    <input type="text" name="titre" placeholder="Titre du commentaire.." maxlenght="128" required>
                     <span></span>
                     <textarea class='contenu' name="contenu" placeholder="Votre commentaire.." required></textarea>
                 </div>

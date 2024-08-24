@@ -86,9 +86,9 @@ function editCommentaire($idCommentaire) {
         <div class="publie">
             <form action="/script/script_update_commentaire.php?idCom=<?php echo $commentaire['Id_Commentaire'] ?>" method="POST">
                 <div class="titre_contenu">
-                    <input type="text" name="titre" placeholder="Titre du commentaire.." value="<?php echo $commentaire['titre'] ?>">
+                    <input type="text" name="titre" placeholder="Titre du commentaire.." value="<?php echo $commentaire['titre'] ?>" maxlenght="128" required>
                     <span></span>
-                    <textarea class='contenu' name="contenu" placeholder="Votre commentaire.."><?php echo $commentaire['contenu'] ?></textarea>
+                    <textarea class='contenu' name="contenu" placeholder="Votre commentaire.." required><?php echo $commentaire['contenu'] ?></textarea>
                 </div>
                 <button type="submit">Modifier</button>
             </form>
