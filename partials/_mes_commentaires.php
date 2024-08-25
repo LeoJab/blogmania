@@ -1,5 +1,21 @@
 <div class="mon_compte">
     <div class="section">
+        <p class="valid">
+            <?php 
+                if(isset($_SESSION['VALIDATE_MESSAGE_DELETE_COMMENTAIRE'])) {
+                    echo $_SESSION['VALIDATE_MESSAGE_DELETE_COMMENTAIRE'];
+                    $_SESSION['VALIDATE_MESSAGE_DELETE_COMMENTAIRE'] = '';
+                }
+            ?>
+        </p>
+        <p class="error">
+            <?php 
+                if(isset($_SESSION['ERROR_MESSAGE_DELETE_COMMENTAIRE'])) {
+                    echo $_SESSION['ERROR_MESSAGE_DELETE_COMMENTAIRE'];
+                    $_SESSION['ERROR_MESSAGE_DELETE_COMMENTAIRE'] = '';
+                }
+            ?>
+        </p>
         <div class="section_commentaires_all">
             <?php foreach($commentaires as $commentaire): ?>
                 <div class="card">

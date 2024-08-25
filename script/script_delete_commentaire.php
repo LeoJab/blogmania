@@ -15,9 +15,9 @@ if(!preg_match('#^[0-9]$#', $idCom) && !is_numeric($idUti)) {
 
 $intIdCom = intval($idCom);
 
-$queryInsertLike = 'DELETE FROM Commentaire WHERE Id_Utilisateur = :idUti AND Id_Commentaire = :idCom';
-$insertLike = $mysqlClient->prepare($queryInsertLike);
-$insertLike->execute([
+$queryDeleteCom = 'DELETE FROM Commentaire WHERE Id_Utilisateur = :idUti AND Id_Commentaire = :idCom';
+$deleteCom = $mysqlClient->prepare($queryDeleteCom);
+$deleteCom->execute([
     'idUti' => $idUti,
     'idCom' => $intIdCom,
 ]);
