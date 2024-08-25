@@ -55,7 +55,7 @@ if($likes == NULL) {
 ?>
 
 <div class="blog">
-    <img src="<?php echo $blog['image']; ?>" alt="Image du Blog">
+    <img src="/ASSET/img/blog/<?php echo $blog['image']; ?>" alt="Image du Blog">
     <div>
         <?php if($isLiked == false): ?>
             <div>
@@ -89,21 +89,30 @@ if($likes == NULL) {
     <div class="blog_commentaires">
         <div class="publie">
             <p class="text_26_black">Publié un commentaire</p>
+            <p class="valid">
+                <?php
+                    if(isset($_SESSION['VALIDATE_MESSAGE_ADD_COMMENTAIRE'])) {
+                        echo $_SESSION['VALIDATE_MESSAGE_ADD_COMMENTAIRE'];
+                        $_SESSION['VALIDATE_MESSAGE_ADD_COMMENTAIRE'] = '';
+                    }
+                ?>
+            </p>
             <form action="/script/script_add_commentaire.php?idBlog=<?php echo $blog['Id_Blog'] ?>" method="POST">
                 <div class="titre_contenu">
-                    <input type="text" name="titre" placeholder="Titre du commentaire.." maxlenght="128" required>
+                    <input type="text" name="titre" placeholder="Titre du commentaire.." maxlenght="50" required>
                     <span></span>
-                    <textarea class='contenu' name="contenu" placeholder="Votre commentaire.." required></textarea>
+                    <textarea class='contenu' name="contenu" placeholder="Votre commentaire.." maxlenght="150" required></textarea>
                 </div>
                 <button type="submit">Envoyer</button>
             </form>
-            <span class="error">
+            <p class="error">
                 <?php
                     if(isset($_SESSION['ERROR_MESSAGE_ADD_COMMENTAIRE'])) {
                         echo $_SESSION['ERROR_MESSAGE_ADD_COMMENTAIRE'];
+                        $_SESSION['ERROR_MESSAGE_ADD_COMMENTAIRE'] = '';
                     }
                 ?>
-            </span>
+            </p>
         </div>
         <?php foreach($commentaires as $commentaire): ?>
             <?php include(__dir__ . '/partials/_card_commentaire.php') ?>

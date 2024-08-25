@@ -147,6 +147,10 @@ p, h1, h2, h3, h4, h5, h6 {
     color: red !important;
 }
 
+.valid {
+    color: greenyellow !important;
+}
+
 /* ----- CARD BLOG ----- */
 .card_blog {
     width: 375px;
@@ -276,6 +280,12 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .formulaire input {
+    border: 0.5px solid var(--Noir);
+    font-size: 22px;
+    width: 100%;
+}
+
+.formulaire select {
     border: 0.5px solid var(--Noir);
     font-size: 22px;
     width: 100%;
