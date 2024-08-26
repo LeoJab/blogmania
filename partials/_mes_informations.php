@@ -1,4 +1,20 @@
-<form class="formulaire" action="#" method="POST">
+<form class="formulaire" action="/../script/script_update_utilisateur.php" method="POST" enctype="multipart/form-data">
+    <p class="valid">
+        <?php 
+            if(isset($_SESSION['VALIDATE_MESSAGE_UPDATE_UTILISATEUR'])) {
+                echo $_SESSION['VALIDATE_MESSAGE_UPDATE_UTILISATEUR'];
+                $_SESSION['VALIDATE_MESSAGE_UPDATE_UTILISATEUR'] = '';
+            }
+        ?>
+    </p>
+    <p class="error">
+        <?php 
+            if(isset($_SESSION['ERROR_MESSAGE_UPDATE_UTILISATEUR'])) {
+                echo $_SESSION['ERROR_MESSAGE_UPDATE_UTILISATEUR'];
+                $_SESSION['ERROR_MESSAGE_UPDATE_UTILISATEUR'] = '';
+            }
+        ?>
+    </p>
     <div class="label_input">
         <div class="double">
             <div>
@@ -21,17 +37,17 @@
             </div>
         </div>
         <label for="email">Email</label>
-        <input type="text" name="email" id="email" value="<?php echo $utiInfo['email'] ?>">
+        <input type="text" name="email" id="email" value="<?php echo $utiInfo['email'] ?>" readonly="readonly">
         <label for="password">Mot de passe</label>
         <input type="password" name="password" id="password">
-        <label for="password_confirm">Confirmation du mot de passe</label>
-        <input type="password" name="password_confirm" id="password_confirm">
+        <label for="confirm_password">Confirmation du mot de passe</label>
+        <input type="password" name="confirm_password" id="confirm_password">
     </div>
     <div class="file">
         <label for="image">Ajouter une photo de profile</label>
         <span class="error" id="errImg"></span>
         <input type="file" name="image" id="image" value="<?php echo $utiInfo['image'] ?>">
-        <img class="pp" id="preview" src="<?php echo $utiInfo['image'] ?>" alt="Prévisualisation de l'image">
+        <img class="pp" id="preview" src="/../ASSET/img/user/<?php echo $utiInfo['image'] ?>" alt="Prévisualisation de l'image">
     </div>
     <button class="btn_gris" type="submit">Modifier</button>
 </form>

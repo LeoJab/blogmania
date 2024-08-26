@@ -26,6 +26,15 @@ $selectBlogRecent->execute();
 $blogRecents = $selectBlogRecent->fetchAll();
 ?>
 
+<p class="valid">
+    <?php 
+        if(isset($_SESSION['VALIDATE_MESSAGE_INSCRIPTION'])) {
+            echo $_SESSION['VALIDATE_MESSAGE_INSCRIPTION'];
+            $_SESSION['VALIDATE_MESSAGE_INSCRIPTION'] = '';
+        }
+    ?>
+</p>
+
 <div class="accueil_top">
     <div class="accueil_blog_pop">
         <p>Blog Populaire</p>

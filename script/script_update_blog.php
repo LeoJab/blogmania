@@ -3,12 +3,13 @@ session_start();
 
 require_once(__dir__ . '/../sql/dataBase/dataBaseConnect.php');
 
-$titre = trim($_POST['titre']);
-$categorie = trim($_POST['categorie']);
+$nom = trim($_POST['nom']);
+$prenom  = trim($_POST['prenom']);
+$pseudo = trim($_POST['pseudo']);
+$ddn = trim($_POST['ddn']);
+$password = trim($_POST['password']);
+$confirmPassword = trim($_POST['confirm_password']);
 $image = $_FILES['image'];
-$contenu = trim($_POST['contenu']);
-$idUti = $_SESSION['LOGGED_USER']['idUti'];
-$idBlog = $_GET['idBlog'];
 
 var_dump($image);
 
@@ -82,7 +83,7 @@ if(empty($titre) && empty($categorie) && empty($image) && empty($contenu)) {
     exit();
 } else {
     // Insertion du commentaire dans la base
-    $queryInsertBlog = ('UPDATE Blog SET titre = :titre, id_categorie = :idCate, image = :image, contenu = :contenu WHERE Id_Blog = :idBlog');
+    $queryInsertBlog = ('UPDATE Utilisateur SET nom = :nom, prenom = :prenom, pseudo = :pseudo, contenu = :contenu WHERE Id_Utilisateur = :idUti');
     $insertBlog = $mysqlClient->prepare($queryInsertBlog);
     $insertBlog->execute([
         'titre' => $titre,

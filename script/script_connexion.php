@@ -1,28 +1,26 @@
 ﻿<?php
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
-session_start();
-
 require_once(__dir__ . '/../sql/dataBase/dataBaseConnect.php');
 
+$email = $_POST['email'];
+$password = $_POST['password'];
 
-$querySelectAllUsers = ('SELECT * FROM Utilisateur');
-$selectAllUsers = $mysqlClient->prepare($querySelectAllUsers);
-$selectAllUsers->execute();
-$allUsers = $selectAllUsers->fetchAll();
+$querySelectUtilisateur = ('SELECT * FROM Utilisateur WHERE email = :email');
+$selectAllUtilisateur = $mysqlClient->prepare($querySelectAllUtilisateur);
+$selectAllUtilisateur->execute([
+    'email' => $email,
+]);
+$utilisateur = $selectAllUtilisateur->fetch(PDO::FETCH_ASSOC);
 
-$postData = $_POST;
+if (empty($email) && empty($password)) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['ERROR_MESSAGE_LOGIN'] = 'Il faut une email valide pour se connecter';
+        header('Location: /../connexion.php');
+        exit();
+    } else if(empty($utilisateur)) {
 
-if (isset($postData['email']) && isset($postData['password'])) {
-    if (!filter_var($postData['email'], FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['LOGIN_ERROR_MESSAGE'] = 'Il faut une email valide pour se connecter';
-    } else {
-        foreach($allUsers as $user) {
             if (
-                $user['email'] === $postData['email'] &&
-                $user['password'] === $postData['password']
+                $user['email'] === $email &&
+                password_verify($password, $utilisateur['password'])
             ) {
                 session_start();
                 $_SESSION['LOGGED_USER'] = [
@@ -35,11 +33,8 @@ if (isset($postData['email']) && isset($postData['password'])) {
         }
 
         if (!isset($_SESSION['LOGGED_USER'])) {
-            $_SESSION['LOGIN_ERROR_MESSAGE'] = sprintf(
-                'Les informations envoyées ne permettent pas de vous identifier : (%s/%s)',
-                $postData['email'],
-                strip_tags($postData['password'])
-            );
-        }  
-    }
+            $_SESSION['ERROR_MESSAGE_LOGIN'] = 'Les informations envoyées ne permettent pas de vous identifier';
+            header('Location: /../connexion.php');
+            exit();
+        }
 }
