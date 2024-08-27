@@ -9,16 +9,10 @@ $pseudo = trim($_POST['pseudo']);
 $ddn = trim($_POST['ddn']);
 $email = trim($_POST['email']);
 $password = trim($_POST['password']);
-$confirmPassword = trim($_POST['confirm_password']);
 $image = $_FILES['image'];
 $idUti = $_SESSION['LOGGED_USER']['idUti'];
 
- var_dump($password);
-
-// Si le password est vide
-if(empty($confirmPassword)) {
-    echo "vide !";
-}
+ var_dump($idUti);
 
 // Vérification de l'image reçus
 if(!empty($_FILES['image']['tmp_name'])){
@@ -66,15 +60,20 @@ if($email != $verifEmail['email']) {
     exit();
 }
 
-// Vérification que les deux mots de passes reçus soit les mêmes
-if($password != $confirmPassword) {
-    $_SESSION['ERROR_MESSAGE_UPDATE_UTILISATEUR'] = "Les mots de passe ne sont pas similaire";
+// Vérification que le mot de passe reçus soit le bon
+$selectPassword = $mysqlClient->prepare('SELECT password FROM Utilisateur WHERE id_utilisateur = :idUti');
+$selectPassword->execute([
+    'idUti' => $idUti,
+]);
+$verifPassword = $selectPassword->fetch(PDO::FETCH_ASSOC);
+
+if(!password_verify($password, $verifPassword['password'])) {
+    $_SESSION['ERROR_MESSAGE_UPDATE_UTILISATEUR'] = "Le mot de pas n'est pas correct";
     header('Location: /../mon_compte.php?page=mes_informations');
     exit();
-} else {
-    $password = password_hash($password, PASSWORD_DEFAULT);
 }
 
+// Vérification que les champs ne sont pas vide et mise à jour des données dans la base
 if(empty($nom) && empty($prenom) && empty($pseudo) && empty($ddn) && empty($password) && empty($image) && empty($idUti)) {
     $_SESSION['ERROR_MESSAGE_UPDATE_UTILISATEUR'] = 'Merci de renseigner toutes les informations';
     header("Location: /../mon_compte.php?page=mes_informations");
@@ -87,7 +86,6 @@ if(empty($nom) && empty($prenom) && empty($pseudo) && empty($ddn) && empty($pass
         ':prenom' => $prenom,
         ':pseudo' => $pseudo,
         ':ddn' => $ddn,
-        ':password' => $password,
         ':image' => $image,
         ':idUti' => $idUti,
     ]);

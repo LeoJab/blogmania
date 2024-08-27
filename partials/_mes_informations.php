@@ -40,8 +40,6 @@
         <input type="text" name="email" id="email" value="<?php echo $utiInfo['email'] ?>" readonly="readonly">
         <label for="password">Mot de passe</label>
         <input type="password" name="password" id="password">
-        <label for="confirm_password">Confirmation du mot de passe</label>
-        <input type="password" name="confirm_password" id="confirm_password">
     </div>
     <div class="file">
         <label for="image">Ajouter une photo de profile</label>

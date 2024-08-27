@@ -9,6 +9,7 @@ $email  = trim($_POST['email']);
 $password = trim($_POST['password']);
 $confirmPassword = trim($_POST['confirm_password']);
 $image = $_FILES['image'];
+$role = 'ROLE_USER';
 
 //var_dump($nom, $prenom, $pseudo, $ddn, $email, $image);
 
@@ -40,6 +41,13 @@ if(isset($_FILES['image'])){
 
 // var_dump($titre, $categorie, $image, $contenu);
 
+// Vérification que l'email soit valide
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $_SESSION['ERROR_MESSAGE_INSCRIPTION'] = 'Il faut une email valide pour se connecter';
+    header('Location: /../inscription.php');
+    exit();
+}
+
 // Vérification que l'email ne soit pas deja utiliser
 $selectEmail = $mysqlClient->prepare('SELECT email FROM Utilisateur WHERE email = :email');
 $selectEmail->execute([
@@ -63,13 +71,13 @@ if($password != $confirmPassword) {
 }
 
 // Si une des informations est vide, renvoi vers la page du blog avec une erreur
-if(empty($nom) && empty($prenom) && empty($pseudo) && empty($ddn) && empty($email) && empty($password) && empty($image)) {
+if(empty($nom) && empty($prenom) && empty($pseudo) && empty($ddn) && empty($email) && empty($password) && empty($image) && empty($role)) {
     $_SESSION['ERROR_MESSAGE_INSCRIPTION'] = 'Merci de remplir tout les champs du formulaire';
     header('Location: /../inscription.php');
     exit();
 } else {
     // Insertion de l'utilisateur dans la base
-    $queryInsertUtilisateur = ('INSERT INTO Utilisateur(nom, prenom, pseudo, ddn, email, password, image) VALUES (:nom, :prenom, :pseudo, :ddn, :email, :password, :image)');
+    $queryInsertUtilisateur = ('INSERT INTO Utilisateur(nom, prenom, pseudo, ddn, email, password, image, role) VALUES (:nom, :prenom, :pseudo, :ddn, :email, :password, :image, :role)');
     $insertUtilisateur = $mysqlClient->prepare($queryInsertUtilisateur);
     $insertUtilisateur->execute([
         'nom' => $nom,
@@ -79,6 +87,7 @@ if(empty($nom) && empty($prenom) && empty($pseudo) && empty($ddn) && empty($emai
         'email' => $email,
         'password' => $password,
         'image' => $image,
+        'role' => $role,
     ]);
 
     // Récupération de l'email de l'utilisateur
