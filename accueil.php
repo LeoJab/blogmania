@@ -34,7 +34,6 @@ $blogRecents = $selectBlogRecent->fetchAll();
         }
     ?>
 </p>
-
 <p class="valid">
     <?php 
         if(isset($_SESSION['VALIDATE_MESSAGE_LOGIN'])) {
@@ -43,7 +42,14 @@ $blogRecents = $selectBlogRecent->fetchAll();
         }
     ?>
 </p>
-
+<p class="error">
+    <?php 
+        if(isset($_SESSION['ERROR_MESSAGE_INSCRIPTION'])) {
+            echo $_SESSION['ERROR_MESSAGE_INSCRIPTION'];
+            $_SESSION['ERROR_MESSAGE_INSCRIPTION'] = '';
+        }
+    ?>
+</p>
 <div class="accueil_top">
     <div class="accueil_blog_pop">
         <p>Blog Populaire</p>

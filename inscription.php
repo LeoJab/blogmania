@@ -1,5 +1,11 @@
 <?php
-require_once(__dir__ . '/header.php')
+require_once(__dir__ . '/header.php');
+
+if(isset($_SESSION['LOGGED_USER'])) {
+    $_SESSION['ERROR_MESSAGE_INSCRIPTION'] = 'Vous êtes déjà inscrit au site !';
+    //header('Location: /../accueil.php');
+    //exit();
+}
 ?>
 <h1 class="titre_90_blue">BlogMania</h1>
 <h2 class="titre_64_black">Inscription</h2>

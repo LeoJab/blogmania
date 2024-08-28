@@ -49,12 +49,13 @@ $likes = $selectLikes->fetch();
 if($likes == NULL) {
     $isLiked = false;
 }
-
-// AJOUT D'UN COMMENTAIRE
-
 ?>
 
 <div class="blog">
+    <?php if($_SESSION['LOGGED_USER']['role'] == 'ROLE_MODERATEUR'): ?>
+        <a href="/admin/moderation.php?page=blogs">Espace Modération: Blogs</a>
+    <?php endif; ?>
+
     <img src="/ASSET/img/blog/<?php echo $blog['image']; ?>" alt="Image du Blog">
     <div>
         <?php if($isLiked == false): ?>
@@ -88,6 +89,9 @@ if($likes == NULL) {
     <h3 class="section_titre titre_32_black">Commentaire (<?php echo $compteurCommentaires['compteur'] ?>)</h3>
     <div class="blog_commentaires">
         <div class="publie">
+            <?php if($_SESSION['LOGGED_USER']['role'] == 'ROLE_MODERATEUR'): ?>
+                <a href="/admin/moderation.php?page=commentaires">Espace Modération: Commentaires</a>
+            <?php endif; ?>
             <p class="text_26_black">Publié un commentaire</p>
             <p class="valid">
                 <?php

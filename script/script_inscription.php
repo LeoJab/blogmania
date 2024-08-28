@@ -1,17 +1,18 @@
 <?php
+session_start();
 require_once(__dir__ . '/../sql/dataBase/dataBaseConnect.php');
 
 $nom = trim($_POST['nom']);
 $prenom  = trim($_POST['prenom']);
 $pseudo = trim($_POST['pseudo']);
 $ddn = trim($_POST['ddn']);
-$email  = trim($_POST['email']);
+$email  = $_POST['email'];
 $password = trim($_POST['password']);
 $confirmPassword = trim($_POST['confirm_password']);
 $image = $_FILES['image'];
 $role = 'ROLE_USER';
 
-//var_dump($nom, $prenom, $pseudo, $ddn, $email, $image);
+//var_dump($nom, $prenom, $pseudo, $ddn, $email, $image, $role);
 
 // Vérification de l'image reçus
 if(isset($_FILES['image'])){
@@ -39,13 +40,11 @@ if(isset($_FILES['image'])){
     }
 }
 
-// var_dump($titre, $categorie, $image, $contenu);
-
 // Vérification que l'email soit valide
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION['ERROR_MESSAGE_INSCRIPTION'] = 'Il faut une email valide pour se connecter';
-    header('Location: /../inscription.php');
-    exit();
+    //header('Location: /../inscription.php');
+    //exit();
 }
 
 // Vérification que l'email ne soit pas deja utiliser
@@ -71,7 +70,7 @@ if($password != $confirmPassword) {
 }
 
 // Si une des informations est vide, renvoi vers la page du blog avec une erreur
-if(empty($nom) && empty($prenom) && empty($pseudo) && empty($ddn) && empty($email) && empty($password) && empty($image) && empty($role)) {
+if(!isset($nom) && !isset($prenom) && !isset($pseudo) && !isset($ddn) && !isset($email) && !isset($password) && !isset($image) && !isset($role)) {
     $_SESSION['ERROR_MESSAGE_INSCRIPTION'] = 'Merci de remplir tout les champs du formulaire';
     header('Location: /../inscription.php');
     exit();
@@ -97,10 +96,12 @@ if(empty($nom) && empty($prenom) && empty($pseudo) && empty($ddn) && empty($emai
     ]);
     $idUti = $selectIdUti->fetch(PDO::FETCH_ASSOC);
 
+    session_destroy();
     session_start();
     $_SESSION['LOGGED_USER'] = [
         'email' => $email,
         'idUti' => $idUti['Id_Utilisateur'],
+        'role' => $role,
     ];
 
     $_SESSION['VALIDATE_MESSAGE_INSCRIPTION'] = 'Vous etes bien inscrit !';

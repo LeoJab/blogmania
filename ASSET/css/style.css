@@ -735,3 +735,39 @@ transform: translate(-50%, -100%)
 .mon_compte .blog_commentaires .contenu {
     width: 900px;
 }
+
+/* ---------- ESPACE MODERATION ---------- */ 
+.espace_mod {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table {
+    border-collapse: collapse;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    font-family: 'Farro';
+  }
+  
+thead{
+    background-color: var(--GrisClaire);
+}
+  
+th, td {
+    border: 1.5px solid var(--Gris) !important;
+    padding: 8px 10px;
+}
+
+.espace_mod_img_blog {
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.espace_mod_img_utilisateur {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}

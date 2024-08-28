@@ -11,6 +11,7 @@ $email = trim($_POST['email']);
 $password = trim($_POST['password']);
 $image = $_FILES['image'];
 $idUti = $_SESSION['LOGGED_USER']['idUti'];
+$is_valid = NULL;
 
  var_dump($idUti);
 
@@ -79,7 +80,7 @@ if(empty($nom) && empty($prenom) && empty($pseudo) && empty($ddn) && empty($pass
     header("Location: /../mon_compte.php?page=mes_informations");
     exit();
 } else {
-    $queryUpdateUtilisateur = ('UPDATE Utilisateur SET nom = :nom, prenom = :prenom, pseudo = :pseudo, ddn = :ddn, image = :image WHERE Id_Utilisateur = :idUti');
+    $queryUpdateUtilisateur = ('UPDATE Utilisateur SET nom = :nom, prenom = :prenom, pseudo = :pseudo, ddn = :ddn, image = :image, is_valid = :is_valid WHERE Id_Utilisateur = :idUti');
     $updateUtilisateur = $mysqlClient->prepare($queryUpdateUtilisateur);
     $updateUtilisateur->execute([
         ':nom' => $nom,
@@ -88,6 +89,7 @@ if(empty($nom) && empty($prenom) && empty($pseudo) && empty($ddn) && empty($pass
         ':ddn' => $ddn,
         ':image' => $image,
         ':idUti' => $idUti,
+        ':is_valid' => $is_valid,
     ]);
 
     $_SESSION['VALIDATE_MESSAGE_UPDATE_UTILISATEUR'] = 'Vos informations ont été modifiées !';

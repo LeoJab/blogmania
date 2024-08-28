@@ -27,6 +27,14 @@ $selectNbrCommentaires->execute([
     'idUti' => $idUti,
 ]);
 $nbrCommentaires = $selectNbrCommentaires->fetch();
+
+// Selection des informations de l'utilisateur
+$sqlQuery = 'SELECT is_valid FROM Utilisateur WHERE id_utilisateur = :idUti AND is_valid = FALSE';
+$selectUtiIsValid = $mysqlClient->prepare($sqlQuery);
+$selectUtiIsValid->execute([
+    'idUti' => $idUti,
+]);
+$utiIsValid = $selectUtiIsValid->fetch();
 ?>
 
 <div id="mon_compte">
@@ -39,6 +47,10 @@ $nbrCommentaires = $selectNbrCommentaires->fetch();
         <li><a class="text_30_black_light" href="/mon_compte.php?page=mes_commentaires">Mes Commentaires (<?php echo $nbrCommentaires['count'] ?>)</a></li>
     </ul>
 </div>
+
+<?php if(isset($utiIsValid['is_valid'])):?>
+    <p class="error">Votre compte est signalé, merci de modifier vos informations !</p>
+<?php endif; ?>
 
 <?php
 switch($page) {
