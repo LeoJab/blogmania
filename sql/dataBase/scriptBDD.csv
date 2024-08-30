@@ -52,7 +52,7 @@ CREATE TABLE Commentaire(
    FOREIGN KEY(Id_Utilisateur) REFERENCES Utilisateur(Id_Utilisateur)
 );
 
-CREATE TABLE likes(
+CREATE TABLE Likes(
    Id_likes INT AUTO_INCREMENT,
    Id_Utilisateur INT,
    Id_Blog INT,

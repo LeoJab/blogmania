@@ -37,7 +37,7 @@ $categories = $selectCategorie->fetchAll();
     <header class="header_computer">
         <div class="header_nav">
             <a href="/acceuil.php">
-                <img id="header_logo" src="ASSET/img/logo.png" alt="Logo du site">
+                <img id="header_logo" src="ASSET/img/Logo.png" alt="Logo du site">
             </a>
             <a class="text_24_black" href="/accueil.php">Accueil</a>
             <p id="btnHeaderBlog" class="text_24_black">Blogs</p>   
@@ -82,7 +82,7 @@ $categories = $selectCategorie->fetchAll();
     <header class="header_mobile">
         <div class="header_nav">
             <a href="/accueil.php">
-                <img id="header_logo" src="ASSET/img/logo.png" alt="Logo du site">
+                <img id="header_logo" src="ASSET/img/Logo.png" alt="Logo du site">
             </a>
             <svg id="btnHeaderMobile" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-justify"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
         </div>

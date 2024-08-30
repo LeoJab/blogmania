@@ -1,7 +1,7 @@
 </div>
 <footer>
     <div>
-        <img src="/ASSET/img/logo.png" alt="Logo du site">
+        <img src="/ASSET/img/Logo.png" alt="Logo du site">
     </div>
     <div>
         <h4>Plan du site</h4>
