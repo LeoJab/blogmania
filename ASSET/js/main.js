@@ -28,6 +28,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // BTN HEADER RESPONSIVE MOBILE
+    const btnHeaderMobile = document.querySelector('#btnHeaderMobile');
+    const headerNavMobile = document.querySelector('#headerNavMobile');
+    console.log(btnHeaderMobile, headerNavMobile);
+
+    if(btnHeaderMobile) {
+        btnHeaderMobile.addEventListener('click', () => {
+            console.log('Click !');
+
+            if(headerNavMobile.classList == 'none') {
+                headerNavMobile.classList.toggle('none');
+            } else {
+                headerNavMobile.classList.toggle('none');
+            }
+        });
+    };
+
     // SECTION BTN
     const btnSvgSectionBlog = document.querySelectorAll('.svg_blog');
     const btnSvgSectionCategorie = document.querySelector('.svg_categorie');

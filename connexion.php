@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    
     include_once(__dir__ . '/header.php');
 ?>
 <h1 class="titre_90_blue">BlogMania</h1>

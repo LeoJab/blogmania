@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 require_once(__dir__ . '/header.php');
 
 $idCategorie = $_GET['id'];

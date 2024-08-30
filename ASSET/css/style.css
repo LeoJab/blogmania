@@ -46,7 +46,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .text_16_black_light {
-    font-size: 18px;
+    font-size: 16px;
     font-family: 'Farro';
     color: var(--Noir);
     font-weight: 100;
@@ -84,7 +84,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .text_26_black {
-    font-size: 24px;
+    font-size: 26px;
     font-family: 'Farro';
     color: var(--Noir);
 }
@@ -149,6 +149,12 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .valid {
     color: greenyellow !important;
+}
+
+.retour {
+    text-decoration: none;
+    color: var(--Noir);
+    font-size: 24px;
 }
 
 /* ----- CARD BLOG ----- */
@@ -413,6 +419,10 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 /* ---------- HEADER ---------- */
+.header_mobile, .header_nav_mobile {
+    display: none;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -770,4 +780,414 @@ th, td {
     width: 150px;
     height: 150px;
     object-fit: cover;
+}
+
+
+/* RESPONSIVE MOBILE */
+@media screen and (max-width: 768px) {
+    /* ---------- SITE GLOBAL ---------- */    
+    #border {
+        padding: 0 40px;
+    }
+
+    .text_16_black_light {
+        font-size: 12px;
+    }
+
+    .text_18_black_light {
+        font-size: 14px;
+    }
+
+    .text_20_black {
+        font-size: 16px;
+    }
+
+    .text_22_black {
+        font-size: 18px;
+    }
+
+    .text_24_black {
+        font-size: 20px;
+    }
+
+    .text_24_white {
+        font-size: 20px;
+    }
+
+    .text_26_black {
+        font-size: 22px;
+    }
+
+    .text_30_black_light {
+        font-size: 26px;
+    }
+
+    .titre_32_black {
+        font-size: 28px;
+    }
+
+    .titre_64_black {
+        font-size: 42px;
+    }
+
+    .titre_90_blue {
+        font-size: 56px;
+    }
+
+    .btn_create {
+        gap: 6px;
+        font-size: 14px;
+        padding: 8px 18px;
+        width: 70%;
+    }
+
+    .btn_create svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .btn_gris {
+        color: white;
+        background: var(--BleuDegrade);
+        font-size: 28px;
+        padding: 10px 22px;
+    }
+
+    .retour {
+        font-size: 18px;
+    }
+    
+    /* ----- CARD BLOG ----- */
+    .card_blog {
+        width: auto;
+    }
+
+    .card_blog img {
+        height: 190px;
+    }
+
+    .card_blog h3 {
+        font-size: 24px;
+    }
+
+    .card_blog p {
+        font-size: 16px;
+        height: 110px;
+    }
+
+    .card_blog a {
+        font-size: 18px;
+        background: var(--BleuDegrade);
+        color: white;
+    }
+
+    /* ----- CARD CATEGORIE ----- */
+    .card_categorie {
+        background: var(--BleuDegrade);
+        padding: 20px;
+    }
+
+    .card_categorie a {
+        color: white;
+        font-size: 22px;
+    }
+
+    .card_categorie:hover a {
+        color: white;
+    }
+
+    /* ----- CARD COMMENTAIRE -----*/
+    .commentaire {
+        display: flex;
+        flex-direction: row;
+        border: 0.5px solid var(--Noir);
+        margin-top: 30px;
+        padding: 5px;
+    }
+
+    .commentaire img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .commentaire .contenu {
+        display: flex;
+        flex-direction: column;
+        margin-left: 5px;
+    }
+
+    .commentaire .contenu .pseudo_date {
+        justify-content: start;
+        height: 40px;
+    }
+
+    .commentaire .contenu h3 {
+        margin-top: 10px !important;
+    }
+
+    /* ----- SECTION: Top Blog /Blog Recent / Tous Blogs / Categorie -----*/
+    .section_titre {
+        padding-bottom: 5px !important;
+        margin-bottom: 20px !important;
+        text-align: center;
+    }
+
+    .section_blogs {
+        gap: 20px;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .section_blogs_all {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .section_commentaires_all {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .section_categories {
+        gap: 20px;
+        height: 90px;
+    }
+
+    .section_btn svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* FORMULAIRE: Connexion / Inscription / Add blog / Update Utilisateur */
+    .formulaire label {
+        font-size: 20px;
+    }
+
+    .formulaire input {
+        font-size: 18px;
+    }
+
+    .formulaire select {
+        font-size: 18px;
+    }
+
+    .formulaire .btn_gris {
+        margin-top: 30px;
+    }
+
+    .formulaire .double {
+        flex-direction: column;
+    }
+
+    .formulaire .double input {
+        width: 100%;
+    }
+
+    .formulaire .date {
+        width: 100% !important;
+    }
+
+    .formulaire textarea {
+        height: 150px;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+        margin-bottom: 90px;
+    }
+
+    .header_computer, .header_nav_computer {
+        display: none;
+    }
+
+    .header_mobile, .header_nav_mobile {
+        display: block;
+    }
+
+    .header_mobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .header_nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .header_nav_mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header_nav_mobile form {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 3px;
+        margin-top: 5px;
+    }
+
+    .header_nav_mobile input {
+        font-size: 20px;
+        border-radius: 5px 0 0 5px;
+        border: 1px solid #F0F0F0;
+        width: 70%;
+    }
+
+    .header_nav_mobile svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    .header_nav_mobile button {
+        background: var(--BleuDegrade);
+        color: white;
+        border-radius: 0 5px 5px 0;
+        border: 1px solid #F0F0F0;
+        cursor: pointer;
+    }
+
+    .btnLogout {
+        margin-top: 5px;
+    }
+
+    /* ---------- FOOTER --------- */
+    footer {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 40px;
+        margin-top: 40px;
+        gap: 20px;
+    }
+
+    footer h4 {
+        font-size: 26px;
+    }
+
+    footer li a {
+        font-size: 20px;
+    }
+
+    footer ul {
+        text-align: center;
+    }
+
+    .footer_titre .btn_create {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    /* ---------- ACCUEIL ----------*/
+    .accueil_top {
+        flex-direction: column-reverse;
+        margin-bottom: 90px;
+        gap: 45px;
+    }
+
+    .accueil_blog_pop p:nth-child(1) {
+        font-size: 18px;
+    }
+
+    .accueil_blog_pop {
+        width: 100%;
+    }
+
+    .accueil_titre {
+        text-align: center;
+    }
+
+    .accueil_top .accueil_titre h2 {
+        font-size: 27px;
+    }
+
+    .accueil_top .accueil_titre h1 {
+        font-size: 60px;
+    }
+
+    .accueil_top .btn_create {
+        font-size: 24px;
+        width: 100%;
+    }
+
+    /* ---------- BLOG ---------- */
+    .blog {
+        margin-bottom: 30px;
+    }
+
+    .blog img {
+        height: 100px;
+        margin-bottom: 10px;
+    }
+
+    .blog .titre_64_black {
+        margin-bottom: 10px !important;
+    }
+
+    .blog .info {
+        margin-top: 15px;
+    }
+
+    .blog_commentaires {
+        padding: 0
+    }
+
+    .blog_commentaires .titre_contenu .contenu {
+        height: 150px !important;
+    }
+
+    .blog_commentaires button {
+        width: 30%;
+    }
+
+    .form_like button svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* ---------- MON COMPTE ---------- */
+    #mon_compte ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* ---------- ESPACE MODERATION ---------- */ 
+    .espace_mod {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    th, td {
+        font-size: 10px;
+        padding: 2px 5px;
+    }
+
+    .espace_mod_img_blog {
+        width: 80px;
+        height: 40px;
+    }
+
+    .espace_mod_img_utilisateur {
+        width: 40px;
+        height: 40px;
+    }
+
+    .espace_mod_contenu {
+        width: 20px;
+    }
+
+    .espace_mod .actions {
+        display: flex;
+        flex-direction: column;
+    }
 }

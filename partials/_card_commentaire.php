@@ -1,5 +1,5 @@
 <div class="commentaire">
-    <img src="<?php echo $commentaire['image'] ?>" alt="Photo de profil de l'utilisateur">
+    <img src="/../ASSET/img/user/<?php echo $commentaire['image'] ?>" alt="Photo de profil de l'utilisateur">
     <div class="contenu">
         <div class="pseudo_date">
             <p class="text_20_black"><?php echo htmlspecialchars($commentaire['pseudo']) ?></p>

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once(__dir__ . '/header.php');
 
 if(isset($_SESSION['LOGGED_USER'])) {

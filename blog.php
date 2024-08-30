@@ -1,8 +1,12 @@
 <?php
+session_start();
+
 require_once(__dir__ . '/header.php');
 
 $idBlog = $_GET['id'];
-$idUti = $_SESSION['LOGGED_USER']['idUti'];
+if(isset($_SESSION['LOGGED_USER'])) {
+    $idUti = $_SESSION['LOGGED_USER']['idUti'];
+}
 
 // QUERY LE BLOG SELON L'ID
 $querySelectBlog = ('SELECT * FROM Blog WHERE is_valid IS NOT FALSE AND Id_Blog = :id;');
@@ -37,22 +41,24 @@ $selectCompteurCommentaire->execute([
 $compteurCommentaires = $selectCompteurCommentaire->fetch();
 
 // VERIFIACTION LIKE
-$isLiked = true;
-$querySelectLikes = ('SELECT id_likes FROM Likes WHERE Id_Utilisateur = :idUti AND Id_Blog = :idBlog');
-$selectLikes = $mysqlClient->prepare($querySelectLikes);
-$selectLikes->execute([
-    'idUti' => $idUti,
-    'idBlog' => $idBlog,
-]);
-$likes = $selectLikes->fetch();
+$isLiked = false;
+if(isset($_SESSION['LOGGED_USER'])) {
+    $querySelectLikes = ('SELECT id_likes FROM Likes WHERE Id_Utilisateur = :idUti AND Id_Blog = :idBlog');
+    $selectLikes = $mysqlClient->prepare($querySelectLikes);
+    $selectLikes->execute([
+        'idUti' => $idUti,
+        'idBlog' => $idBlog,
+    ]);
+    $likes = $selectLikes->fetch();
 
-if($likes == NULL) {
-    $isLiked = false;
+    if($likes != NULL) {
+        $isLiked = true;
+    }
 }
 ?>
 
 <div class="blog">
-    <?php if($_SESSION['LOGGED_USER']['role'] == 'ROLE_MODERATEUR'): ?>
+    <?php if(!isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER']['role'] == 'ROLE_MODERATEUR'): ?>
         <a href="/admin/moderation.php?page=blogs">Espace Modération: Blogs</a>
     <?php endif; ?>
 
@@ -89,7 +95,7 @@ if($likes == NULL) {
     <h3 class="section_titre titre_32_black">Commentaire (<?php echo $compteurCommentaires['compteur'] ?>)</h3>
     <div class="blog_commentaires">
         <div class="publie">
-            <?php if($_SESSION['LOGGED_USER']['role'] == 'ROLE_MODERATEUR'): ?>
+            <?php if(!isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER']['role'] == 'ROLE_MODERATEUR'): ?>
                 <a href="/admin/moderation.php?page=commentaires">Espace Modération: Commentaires</a>
             <?php endif; ?>
             <p class="text_26_black">Publié un commentaire</p>

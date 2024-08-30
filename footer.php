@@ -10,8 +10,7 @@
             <li><a href="/add_blog.php">Créer mon blog</a></li>
             <li><a href="/inscription.php">Inscription</a></li>
             <li><a href="/connexion.php">Connexion</a></li>
-            <li><a href="#">Mon compte</a></li>
-            <li><a href="/contact.php">Contact</a></li>
+            <li><a href="/mon_compte.php?page=mes_informations">Mon compte</a></li>
         </ul>
     </div>
     <div>

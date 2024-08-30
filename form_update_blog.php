@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once(__dir__ . '/header.php');
 
 $idUti = $_SESSION['LOGGED_USER']['idUti'];
@@ -21,6 +23,7 @@ if(empty($blog)) {
 }
 ?>
 
+<a class="retour" href="/mon_compte.php?page=mes_blogs"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-to-line"><path d="M3 19V5"/><path d="m13 6-6 6 6 6"/><path d="M7 12h14"/></svg>Retour</a>
 <h1 class="titre_90_blue">BlogMania</h1>
 <h2 class="titre_64_black">Modification de votre blog</h2>
 <form class="formulaire" action="/script/script_update_blog.php?idBlog=<?php echo $blog['Id_Blog'] ?>" method="POST" enctype="multipart/form-data">

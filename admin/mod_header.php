@@ -23,9 +23,12 @@ require_once(__dir__ . '/../function.php');
 </head>
 <body>
     <div id="border">
-    <header>
-        <div class="header_nav">
-            <img id="header_logo" src="/../ASSET/img/logo.png" alt="Logo du site">
+    <!-- HEADER COMPUTER -->
+    <header class="header_computer">
+        <div class="header_nac">
+            <a href="/../accueil.php">
+                <img id="header_logo" src="/../ASSET/img/logo.png" alt="Logo du site">
+            </a>
             <a class="text_24_black" href="/../accueil.php">Revenir sur le site</a>
         </div>
         <div class="header_nav">
@@ -33,6 +36,22 @@ require_once(__dir__ . '/../function.php');
             <a class="text_24_black" href="/admin/moderation.php?page=blogs">Espace modération</a>
             <?php if(isset($_SESSION['LOGGED_USER'])): ?>
                 <a class="btnLogout" href="/../script/script_deconnexion.php"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right-to-line"><path d="M17 12H3"/><path d="m11 18 6-6-6-6"/><path d="M21 5v14"/></svg></a>
+            <?php endif; ?>
+        </div>
+    </header>
+    <!-- HEADER MOBILE -->
+    <header class="header_mobile">
+        <div class="header_nav">
+            <a href="/accueil.php">
+                <img id="header_logo" src="/../ASSET/img/logo.png" alt="Logo du site">
+            </a>
+            <svg id="btnHeaderMobile" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-justify"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+        </div>
+        <div class="header_nav_mobile none" id="headerNavMobile">
+            <a class="text_24_black" href="/admin/admin.php?page=blogs">Espace admin</a>
+            <a class="text_24_black" href="/admin/moderation.php?page=blogs">Espace modération</a>
+            <?php if(isset($_SESSION['LOGGED_USER'])): ?>
+                <a class="btnLogout" href="/../script/script_deconnexion.php">Deconnexion</a>
             <?php endif; ?>
         </div>
     </header>

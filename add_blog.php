@@ -1,10 +1,12 @@
 <?php
-require_once(__dir__ . '/header.php');
+session_start();
 
 if(!isset($_SESSION['LOGGED_USER'])) {
     header ('Location: /connexion.php');
     exit();
 }
+
+require_once(__dir__ . '/header.php');
 ?>
 
 <h1 class="titre_90_blue">BlogMania</h1>
