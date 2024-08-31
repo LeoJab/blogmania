@@ -17,6 +17,10 @@
     display: block !important;
 }
 
+pre {
+	text-wrap: wrap !important;	
+}
+
 #border {
     padding: 0 300px;
 }

@@ -85,7 +85,7 @@ if(isset($_SESSION['LOGGED_USER'])) {
            <p class="error"><?php echo $_SESSION['LIKE_ERROR_MESSAGE']; ?></p>
     <?php endif; ?>
     <h1 class="titre_64_black"><?php echo $blog['titre']; ?></h1>
-    <p class="text_22_black"><?php echo $blog['contenu']; ?></p>
+	<pre class="text_22_black"><?php echo $blog['contenu']; ?></pre>
     <div class="info">
         <p class="text_18_black_light">Publié par <?php echo $infoUti['pseudo']; ?></p>
         <p class="text_18_black_light">Le <?php echo $blog['date_ajout']; ?></p>

@@ -19,33 +19,33 @@
         <div class="double">
             <div>
                 <label for="nom">Nom</label>
-                <input type="text" name="nom" id="name" value="<?php echo $utiInfo['nom'] ?>">
+                <input type="text" name="nom" id="name" value="<?php echo htmlspecialchars($utiInfo['nom']) ?>">
             </div>
             <div>
                 <label for="prenom">Prenom</label>
-                <input type="text" name="prenom" id="prenom" value="<?php echo $utiInfo['prenom'] ?>">
+                <input type="text" name="prenom" id="prenom" value="<?php echo htmlspecialchars($utiInfo['prenom']) ?>">
             </div>
         </div>
         <div class="double">
             <div>
                 <label for="pseudo">Pseudo</label>
-                <input type="text" name="pseudo" id="pseudo" value="<?php echo $utiInfo['pseudo'] ?>">
+                <input type="text" name="pseudo" id="pseudo" value="<?php echo htmlspecialchars($utiInfo['pseudo']) ?>">
             </div>
             <div>
                 <label for="ddn">Date de naissance</label>
-                <input class="date" type="date" name="ddn" id="ddn" value="<?php echo $utiInfo['ddn'] ?>">
+                <input class="date" type="date" name="ddn" id="ddn" value="<?php echo htmlspecialchars($utiInfo['ddn']) ?>">
             </div>
         </div>
         <label for="email">Email</label>
-        <input type="text" name="email" id="email" value="<?php echo $utiInfo['email'] ?>" readonly="readonly">
+        <input type="text" name="email" id="email" value="<?php echo htmlspecialchars($utiInfo['email']) ?>" readonly="readonly">
         <label for="password">Mot de passe</label>
         <input type="password" name="password" id="password">
     </div>
     <div class="file">
         <label for="image">Ajouter une photo de profile</label>
         <span class="error" id="errImg"></span>
-        <input type="file" name="image" id="image" value="<?php echo $utiInfo['image'] ?>">
-        <img class="pp" id="preview" src="/../ASSET/img/user/<?php echo $utiInfo['image'] ?>" alt="Prévisualisation de l'image">
+        <input type="file" name="image" id="image" value="<?php echo htmlspecialchars($utiInfo['image']) ?>">
+        <img class="pp" id="preview" src="/../ASSET/img/user/<?php echo htmlspecialchars($utiInfo['image']) ?>" alt="Prévisualisation de l'image">
     </div>
     <button class="btn_gris" type="submit">Modifier</button>
 </form>
