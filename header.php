@@ -7,7 +7,7 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 // QUERY TOUTES LES CATEGORIES
-$queryCategorie = 'SELECT * FROM categorie';
+$queryCategorie = 'SELECT * FROM Categorie';
 $selectCategorie = $mysqlClient->prepare($queryCategorie);
 $selectCategorie->execute();
 $categories = $selectCategorie->fetchAll();
@@ -19,7 +19,7 @@ $categories = $selectCategorie->fetchAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="/ASSET/img/logo.png">
+    <link rel="icon" href="/ASSET/img/Logo.png">
 
     <link rel="stylesheet" href="ASSET/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">

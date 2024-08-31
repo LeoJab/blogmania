@@ -43,9 +43,9 @@
         <tbody>
             <?php foreach($commentaires as $commentaire): ?>
                 <tr>
-                    <th><?php echo $commentaire['Id_Commentaire'] ?></td>
-                    <td><?php echo $commentaire['titre'] ?></td>
-                    <td><?php echo $commentaire['contenu'] ?></td>
+                    <th><?php echo htmlspecialchars($commentaire['Id_Commentaire']) ?></td>
+                    <td><?php echo htmlspecialchars($commentaire['titre']) ?></td>
+                    <td><?php echo htmlspecialchars($commentaire['contenu']) ?></td>
                     <td class="actions">
                         <a href="/../blog.php?id=<?php echo $commentaire['Id_Blog'] ?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg></a>
                         <a href="/../script/admin_script_valide_commentaire.php?idCom=<?php echo $commentaire['Id_Commentaire'] ?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg></a>

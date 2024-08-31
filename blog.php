@@ -25,7 +25,7 @@ $selectSelectInfoUti->execute([
 $infoUti = $selectSelectInfoUti->fetch();
 
 // QUERY COMMENTAIRE CORESPONDANT AU BLOG
-$querySelectCommentaire = ('SELECT Commentaire.*, utilisateur.* FROM Commentaire INNER JOIN utilisateur ON utilisateur.id_utilisateur = commentaire.Id_Utilisateur WHERE commentaire.is_valid IS NOT FALSE AND id_Blog = :id ORDER BY Commentaire.Date_publication ASC;');
+$querySelectCommentaire = ('SELECT Commentaire.*, Utilisateur.* FROM Commentaire INNER JOIN Utilisateur ON Utilisateur.id_utilisateur = Commentaire.Id_Utilisateur WHERE Commentaire.is_valid IS NOT FALSE AND id_Blog = :id ORDER BY Commentaire.Date_publication ASC;');
 $selectCommentaire = $mysqlClient->prepare($querySelectCommentaire);
 $selectCommentaire->execute([
     'id' => $idBlog,
@@ -58,7 +58,7 @@ if(isset($_SESSION['LOGGED_USER'])) {
 ?>
 
 <div class="blog">
-    <?php if(!isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER']['role'] == 'ROLE_MODERATEUR'): ?>
+    <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER']['role'] == 'ROLE_MODERATEUR'): ?>
         <a href="/admin/moderation.php?page=blogs">Espace Modération: Blogs</a>
     <?php endif; ?>
 
@@ -95,7 +95,7 @@ if(isset($_SESSION['LOGGED_USER'])) {
     <h3 class="section_titre titre_32_black">Commentaire (<?php echo $compteurCommentaires['compteur'] ?>)</h3>
     <div class="blog_commentaires">
         <div class="publie">
-            <?php if(!isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER']['role'] == 'ROLE_MODERATEUR'): ?>
+            <?php if(isset($_SESSION['LOGGED_USER']) && $_SESSION['LOGGED_USER']['role'] == 'ROLE_MODERATEUR'): ?>
                 <a href="/admin/moderation.php?page=commentaires">Espace Modération: Commentaires</a>
             <?php endif; ?>
             <p class="text_26_black">Publié un commentaire</p>

@@ -45,11 +45,11 @@
         <tbody>
             <?php foreach($utilisateurs as $utilisateur): ?>
                 <tr>
-                    <th><?php echo $utilisateur['Id_Utilisateur'] ?></td>
-                    <td><img class="espace_mod_img_utilisateur" src="/../ASSET/img/user/<?php echo $utilisateur['image'] ?>"></td>
-                    <td><?php echo $utilisateur['nom'] ?></td>
-                    <td><?php echo $utilisateur['prenom'] ?></td>
-                    <td><?php echo $utilisateur['pseudo'] ?></td>
+                    <th><?php echo htmlspecialchars($utilisateur['Id_Utilisateur']) ?></td>
+                    <td><img class="espace_mod_img_utilisateur" src="/../ASSET/img/user/<?php echo htmlspecialchars($utilisateur['image']) ?>"></td>
+                    <td><?php echo htmlspecialchars($utilisateur['nom']) ?></td>
+                    <td><?php echo htmlspecialchars($utilisateur['prenom']) ?></td>
+                    <td><?php echo htmlspecialchars($utilisateur['pseudo']) ?></td>
                     <td class="actions">
                         <a href="/../script/mod_script_signal_utilisateur.php?idUti=<?php echo $utilisateur['Id_Utilisateur'] ?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flag"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg></a>
                         <a href="/../script/mod_script_valide_utilisateur.php?idUti=<?php echo $utilisateur['Id_Utilisateur'] ?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5"/></svg></a>
